@@ -1,4 +1,5 @@
 import React from 'react';
+import project1 from '../assets/project1.png'
 
 const Projects = () => {
   return (
@@ -15,8 +16,8 @@ const Projects = () => {
           {/* Project cards are bg-white text-black, which will stand out well against animated-bg */}
           <div className="project-card bg-white text-black rounded-none overflow-hidden fade-in-scale">
             <div className="h-64 bg-gradient-to-br from-gray-900 to-gray-600 flex items-center justify-center relative">
-              <div className="text-6xl">🌐</div>
-              <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+              <div className="text-6xl"><img src={project1} alt="" className=" w-full object-contain" /></div>
+              {/* <div className="absolute inset-0 bg-opacity-20"></div> */}
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-bold mb-4">E-COMMERCE PLATFORM</h3>
@@ -26,11 +27,11 @@ const Projects = () => {
               </p>
               <div className="flex flex-wrap gap-3 mb-6">
                 <span className="border border-black px-3 py-1 text-sm">REACT</span>
-                <span className="border border-black px-3 py-1 text-sm">NODE.JS</span>
-                <span className="border border-black px-3 py-1 text-sm">MONGODB</span>
+                {/* <span className="border border-black px-3 py-1 text-sm">NODE.JS</span>
+                <span className="border border-black px-3 py-1 text-sm">MONGODB</span> */}
               </div>
               <button className="group flex items-center gap-2 font-semibold hover:gap-4 transition-all duration-300">
-                VIEW PROJECT
+                <a href="https://my-luxe-store.vercel.app/"> VIEW PROJECT</a>
                 <span className="transform group-hover:translate-x-2 transition-transform duration-300">→</span>
               </button>
             </div>

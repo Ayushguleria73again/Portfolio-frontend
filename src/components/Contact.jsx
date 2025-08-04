@@ -39,7 +39,7 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/mail/send', {
+      const response = await axios.post('https://portfolio-backend-bkfk.onrender.com/api/mail/send', {
         to: formData.email,
         subject: formData.subject,
         text: `Name: ${formData.name}\nMessage: ${formData.message}`, 

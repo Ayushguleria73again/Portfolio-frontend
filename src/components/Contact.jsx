@@ -14,7 +14,6 @@ import {
   faTwitter,
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
-import axios from 'axios';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -39,19 +38,34 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      const response = await axios.post('https://portfolio-backend-bkfk.onrender.com/api/mail/send', {
-        to: formData.email,
-        subject: formData.subject,
-        text: `Name: ${formData.name}\nMessage: ${formData.message}`, 
+      const response = await fetch('https://portfolio-backend-z2xp.onrender.com/mail/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
       });
-      if (response.data.success) {
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
         setSuccessMessage('Email sent successfully!');
-        setFormData({ name: '', email: '', subject: '', message: '' }); 
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setErrorMessage('Failed to send email. Please try again later.');
       }
     } catch (error) {
       setErrorMessage('Failed to send email. Please try again later.');
-      console.log(error);
-      
+      console.error('Fetch error:', error);
     } finally {
       setLoading(false);
     }

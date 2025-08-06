@@ -93,7 +93,7 @@ const Footer = () => {
             variants={itemVariants}
           >
             <motion.p className="text-sm opacity-70" variants={itemVariants}>
-              © 2024 Ayush Guleria. Crafted with{' '}
+              © 2025 Ayush Guleria. Crafted with{' '}
               <motion.span
                 variants={heartVariants}
                 animate="animate"

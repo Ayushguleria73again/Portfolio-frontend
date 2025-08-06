@@ -73,17 +73,7 @@ const About = () => {
     }
   };
 
-  const orbitVariants = {
-    animate: (delay) => ({
-      rotate: 360,
-      transition: {
-        duration: 15 + delay * 5,
-        repeat: Infinity,
-        ease: "linear",
-        delay: delay
-      }
-    })
-  };
+
 
   return (
     <section id="about" className="py-32 animated-bg text-white relative">
@@ -183,24 +173,9 @@ const About = () => {
                 
                 {/* Orbiting elements */}
                 <motion.div className="absolute inset-0">
-                  <motion.div 
-                    className="skill-orbit absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -ml-2 -mt-2"
-                    variants={orbitVariants}
-                    animate="animate"
-                    custom={0}
-                  />
-                  <motion.div 
-                    className="skill-orbit absolute top-1/2 left-1/2 w-3 h-3 bg-gray-400 rounded-full -ml-1.5 -mt-1.5"
-                    variants={orbitVariants}
-                    animate="animate"
-                    custom={1}
-                  />
-                  <motion.div 
-                    className="skill-orbit absolute top-1/2 left-1/2 w-2 h-2 bg-gray-600 rounded-full -ml-1 -mt-1"
-                    variants={orbitVariants}
-                    animate="animate"
-                    custom={2}
-                  />
+                <div className="skill-orbit absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -ml-2 -mt-2"></div>
+                  <div className="skill-orbit absolute top-1/2 left-1/2 w-3 h-3 bg-gray-400 rounded-full -ml-1.5 -mt-1.5" style={{ animationDelay: '-5s', animationDuration: '15s' }}></div>
+                  <div className="skill-orbit absolute top-1/2 left-1/2 w-2 h-2 bg-gray-600 rounded-full -ml-1 -mt-1" style={{ animationDelay: '-10s', animationDuration: '25s' }}></div>
                 </motion.div>
               </motion.div>
             </motion.div>

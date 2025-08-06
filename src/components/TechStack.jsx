@@ -48,7 +48,7 @@ const TechStack = () => {
     }
   };
 
-  const techs = [
+  const techItems = [
     { icon: faReact, name: 'React' },
     { icon: faNodeJs, name: 'Node.js' },
     { icon: faPython, name: 'Python' },
@@ -78,24 +78,17 @@ const TechStack = () => {
         >
           TECH STACK
         </motion.h2>
-        <motion.div
-          className="flex flex-wrap justify-center gap-6"
-          variants={containerVariants}
-        >
-          {techs.map((techs, index) => (
-            <motion.div
-              key={index}
-              className=" rounded-lg px-6 py-3 text-lg cursor-pointer"
-              variants={itemVariants}
-              whileHover="hover"
-            >
+             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-20">
+          {techItems.map((item, index) => (
+            <div key={index} className="tech-item text-center slide-in-up group" style={{ animationDelay: `${index * 0.1}s` }}>
               <div className="w-20 h-20 mx-auto mb-4 bg-gray-800 rounded-2xl shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <FontAwesomeIcon icon={techs.icon} className="text-3xl" />
+                <FontAwesomeIcon icon={item.icon} className="text-3xl" />
               </div>
-              <p className="font-semibold">{techs.name}</p>
-            </motion.div>
+              <p className="font-semibold">{item.name}</p>
+            </div>
           ))}
-        </motion.div>
+        </div>
+       
       </motion.div>
     </section>
   );

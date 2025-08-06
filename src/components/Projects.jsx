@@ -1,5 +1,6 @@
 import React from 'react';
 import project1 from '../assets/project1.png';
+import taskmanager from '../assets/taskmanager.png'; // Import task manager image if available
 
 const Projects = () => {
   // Define project data with Font Awesome icons and specific styling
@@ -14,13 +15,13 @@ const Projects = () => {
       link:'https://my-luxe-store.vercel.app/'
     },
     {
-      image: '', // Add an image path if available
+      image: taskmanager, // Add an image path if available
       title: 'TASK MANAGEMENT',
       description: 'Collaborative workspace with real-time synchronization, advanced filtering, and intuitive drag-and-drop interface. Designed for modern teams.',
       tech: ['REACT', 'currently working on Backend with Node.js', 'and MONGODB'],
       gradientFrom: 'from-gray-800',
       gradientTo: 'to-gray-500',
-      link:''
+      link:'https://task-manager-plum-zeta.vercel.app/'
     },
   ];
 

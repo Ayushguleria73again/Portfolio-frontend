@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope,
   faPhone,
   faMapMarkerAlt,
-  faUser ,
+  faUser,
   faTag,
   faCommentDots,
 } from '@fortawesome/free-solid-svg-icons';
@@ -71,116 +72,277 @@ const Contact = () => {
     }
   };
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const textVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const formVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const contactInfoVariants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const inputVariants = {
+    focus: {
+      scale: 1.02,
+      borderColor: "#ffffff",
+      transition: { duration: 0.2 }
+    }
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      transition: { type: "spring", stiffness: 300 }
+    },
+    tap: {
+      scale: 0.95
+    }
+  };
+
+  const socialVariants = {
+    hover: {
+      scale: 1.2,
+      rotate: 360,
+      transition: { duration: 0.3 }
+    }
+  };
+
   return (
     <section id="contact" className="py-32 animated-bg relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-7xl font-extralight mb-8 text-glow slide-in-up">CONTACT</h2>
-          <p className="text-xl opacity-70 slide-in-up max-w-2xl mx-auto leading-relaxed">
+      <motion.div 
+        className="max-w-7xl mx-auto px-6 relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <motion.div className="text-center mb-20" variants={containerVariants}>
+          <motion.h2 
+            className="text-5xl md:text-7xl font-extralight mb-8 text-glow"
+            variants={textVariants}
+          >
+            CONTACT
+          </motion.h2>
+          <motion.p 
+            className="text-xl opacity-70 max-w-2xl mx-auto leading-relaxed"
+            variants={textVariants}
+          >
             Ready to create something extraordinary together? Let's turn your vision into digital reality.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <motion.div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Form */}
-          <div className="slide-in-left">
-            <h3 className="text-3xl font-bold mb-8">Send a Message</h3>
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="relative">
-                  <FontAwesomeIcon icon={faUser } className="absolute top-1/2 left-4 -translate-y-1/2 text-white opacity-70" />
-                  <input
+          <motion.div variants={formVariants}>
+            <motion.h3 
+              className="text-3xl font-bold mb-8"
+              variants={textVariants}
+            >
+              Send a Message
+            </motion.h3>
+            <motion.form 
+              className="space-y-6"
+              onSubmit={handleSubmit}
+              variants={containerVariants}
+            >
+              <motion.div className="grid md:grid-cols-2 gap-6" variants={containerVariants}>
+                <motion.div className="relative" variants={containerVariants}>
+                  <FontAwesomeIcon icon={faUser} className="absolute top-1/2 left-4 -translate-y-1/2 text-white opacity-70" />
+                  <motion.input
                     type="text"
                     name="name"
                     placeholder="Your Name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full pl-12 pr-6 py-4 bg-black border border-white rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all duration-300"
+                    variants={inputVariants}
+                    whileFocus="focus"
+                    className="w-full pl-12 pr-6 py-4 bg-black border border-white rounded-2xl text-white placeholder-gray-400 focus:outline-none transition-all duration-300"
                     required
                   />
-                </div>
-                <div className="relative">
+                </motion.div>
+                <motion.div className="relative" variants={containerVariants}>
                   <FontAwesomeIcon icon={faEnvelope} className="absolute top-1/2 left-4 -translate-y-1/2 text-white opacity-70" />
-                  <input
+                  <motion.input
                     type="email"
                     name="email"
                     placeholder="Your Email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full pl-12 pr-6 py-4 bg-black border border-white rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all duration-300"
+                    variants={inputVariants}
+                    whileFocus="focus"
+                    className="w-full pl-12 pr-6 py-4 bg-black border border-white rounded-2xl text-white placeholder-gray-400 focus:outline-none transition-all duration-300"
                     required
                   />
-                </div>
-              </div>
-              <div className="relative">
+                </motion.div>
+              </motion.div>
+              
+              <motion.div className="relative" variants={containerVariants}>
                 <FontAwesomeIcon icon={faTag} className="absolute top-1/2 left-4 -translate-y-1/2 text-white opacity-70" />
-                <input
+                <motion.input
                   type="text"
                   name="subject"
                   placeholder="Subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full pl-12 pr-6 py-4 bg-black border border-white rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all duration-300"
+                  variants={inputVariants}
+                  whileFocus="focus"
+                  className="w-full pl-12 pr-6 py-4 bg-black border border-white rounded-2xl text-white placeholder-gray-400 focus:outline-none transition-all duration-300"
                   required
                 />
-              </div>
-              <div className="relative">
+              </motion.div>
+              
+              <motion.div className="relative" variants={containerVariants}>
                 <FontAwesomeIcon icon={faCommentDots} className="absolute top-4 left-4 text-white opacity-70" />
-                <textarea
+                <motion.textarea
                   rows="6"
                   name="message"
                   placeholder="Your Message"
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full pl-12 pr-6 py-4 bg-black border border-white rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-white transition-all duration-300 resize-none"
+                  variants={inputVariants}
+                  whileFocus="focus"
+                  className="w-full pl-12 pr-6 py-4 bg-black border border-white rounded-2xl text-white placeholder-gray-400 focus:outline-none transition-all duration-300 resize-none"
                   required
-                ></textarea>
-              </div>
-              <button type="submit" className="group relative px-8 py-4 bg-white text-black hover:bg-transparent hover:text-white border-2 border-white rounded-full transition-all duration-500 font-semibold">
-                {loading ? 'Sending...' : 'SEND MESSAGE'}
-              </button>
-              {successMessage && <p className="text-green-500">{successMessage}</p>}
-              {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-            </form>
-          </div>
+                ></motion.textarea>
+              </motion.div>
+              
+              <motion.button
+                type="submit"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                disabled={loading}
+                className="group relative px-8 py-4 bg-white text-black hover:bg-transparent hover:text-white border-2 border-white rounded-full transition-all duration-500 font-semibold disabled:opacity-50"
+              >
+                {loading ? (
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    className="w-5 h-5 border-2 border-black border-t-transparent rounded-full"
+                  />
+                ) : (
+                  'SEND MESSAGE'
+                )}
+              </motion.button>
+              
+              <AnimatePresence>
+                {successMessage && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="text-green-500"
+                  >
+                    {successMessage}
+                  </motion.p>
+                )}
+                {errorMessage && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="text-red-500"
+                  >
+                    {errorMessage}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.form>
+          </motion.div>
 
           {/* Contact Info & Map */}
-          <div className="slide-in-right">
-            <div className="mb-12">
-              <h3 className="text-3xl font-bold mb-8">Get in Touch</h3>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center">
+          <motion.div variants={contactInfoVariants}>
+            <motion.div className="mb-12" variants={containerVariants}>
+              <motion.h3 
+                className="text-3xl font-bold mb-8"
+                variants={textVariants}
+              >
+                Get in Touch
+              </motion.h3>
+              <motion.div className="space-y-6" variants={containerVariants}>
+                <motion.div className="flex items-center gap-4" variants={textVariants}>
+                  <motion.div 
+                    className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center"
+                    whileHover={{ scale: 1.1 }}
+                  >
                     <FontAwesomeIcon icon={faEnvelope} className="text-xl" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Email</p>
-                    <p className="opacity-70">ayushguleria73@gmail.com</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center">
+                  </motion.div>
+                  <motion.div>
+                    <motion.p className="font-semibold">Email</motion.p>
+                    <motion.p className="opacity-70">ayushguleria73@gmail.com</motion.p>
+                  </motion.div>
+                </motion.div>
+                
+                <motion.div className="flex items-center gap-4" variants={textVariants}>
+                  <motion.div 
+                    className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center"
+                    whileHover={{ scale: 1.1 }}
+                  >
                     <FontAwesomeIcon icon={faPhone} className="text-xl" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Phone</p>
-                    <p className="opacity-70">+91 85805 23265</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center">
+                  </motion.div>
+                  <motion.div>
+                    <motion.p className="font-semibold">Phone</motion.p>
+                    <motion.p className="opacity-70">+91 85805 23265</motion.p>
+                  </motion.div>
+                </motion.div>
+                
+                <motion.div className="flex items-center gap-4" variants={textVariants}>
+                  <motion.div 
+                    className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center"
+                    whileHover={{ scale: 1.1 }}
+                  >
                     <FontAwesomeIcon icon={faMapMarkerAlt} className="text-xl" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Location</p>
-                    <p className="opacity-70">Himachal Pradesh, India</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </motion.div>
+                  <motion.div>
+                    <motion.p className="font-semibold">Location</motion.p>
+                    <motion.p className="opacity-70">Himachal Pradesh, India</motion.p>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
 
             {/* Interactive Map */}
-            <div className="bg-black rounded-3xl p-2 h-64 flex items-center justify-center border border-white overflow-hidden">
+            <motion.div 
+              className="bg-black rounded-3xl p-2 h-64 flex items-center justify-center border border-white overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d976.8597843907119!2d75.98610173714472!3d32.1125452345353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1754305777740!5m2!1sen!2sin"
                 width="100%"
@@ -191,30 +353,57 @@ const Contact = () => {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Himachal Pradesh, India Map"
               ></iframe>
-            </div>
+            </motion.div>
 
             {/* Social Links */}
-            <div className="mt-8 flex gap-4">
-              <a href="https://www.linkedin.com/in/ayush-guleria-162a83206/" className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center hover:bg-opacity-20 transition-all duration-300">
-                <FontAwesomeIcon icon={faLinkedin} className="text-xl" />
-              </a>
-              <a href="https://github.com/Ayushguleria73again" className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center hover:bg-opacity-20 transition-all duration-300">
-                <FontAwesomeIcon icon={faGithub} className="text-xl" />
-              </a>
-              <a href="#" className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center hover:bg-opacity-20 transition-all duration-300">
-                <FontAwesomeIcon icon={faTwitter} className="text-xl" />
-              </a>
-              <a href="https://www.instagram.com/_ayush_guleria_/" className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center hover:bg-opacity-20 transition-all duration-300">
-                <FontAwesomeIcon icon={faInstagram} className="text-xl" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+            <motion.div className="mt-8 flex gap-4" variants={containerVariants}>
+              {[
+                { icon: faLinkedin, href: "https://www.linkedin.com/in/ayush-guleria-162a83206/" },
+                { icon: faGithub, href: "https://github.com/Ayushguleria73again" },
+                { icon: faTwitter, href: "#" },
+                { icon: faInstagram, href: "https://www.instagram.com/_ayush_guleria_/" }
+              ].map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.href}
+                  variants={socialVariants}
+                  whileHover="hover"
+                  className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center hover:bg-opacity-20 transition-all duration-300"
+                >
+                  <FontAwesomeIcon icon={social.icon} className="text-xl" />
+                </motion.a>
+              ))}
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
 
       {/* Background elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 border border-white opacity-10 morphing-shape"></div>
-      <div className="absolute bottom-20 right-10 w-24 h-24 border border-white opacity-10 morphing-shape" style={{ animationDelay: '-4s' }}></div>
+      <motion.div 
+        className="absolute top-20 left-10 w-32 h-32 border border-white opacity-10 morphing-shape"
+        animate={{
+          rotate: [0, 360],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-20 right-10 w-24 h-24 border border-white opacity-10 morphing-shape"
+        animate={{
+          rotate: [0, -360],
+          scale: [1, 1.3, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: -4
+        }}
+      />
     </section>
   );
 };

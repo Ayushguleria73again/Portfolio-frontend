@@ -41,7 +41,7 @@ const Projects = () => {
           <div className="project-card bg-white text-black rounded-none overflow-hidden fade-in-scale">
             <div className="h-64 bg-gradient-to-br from-gray-800 to-gray-500 flex items-center justify-center relative">
               <div className="text-6xl">📱</div>
-              <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+              {/* <div className="absolute inset-0 bg-black bg-opacity-20"></div> */}
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-bold mb-4">TASK MANAGEMENT</h3>
@@ -65,7 +65,7 @@ const Projects = () => {
           <div className="project-card bg-white text-black rounded-none overflow-hidden fade-in-scale">
             <div className="h-64 bg-gradient-to-br from-gray-700 to-gray-400 flex items-center justify-center relative">
               <div className="text-6xl">📊</div>
-              <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+              {/* <div className="absolute inset-0 bg-black bg-opacity-20"></div> */}
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-bold mb-4">ANALYTICS DASHBOARD</h3>
@@ -89,7 +89,7 @@ const Projects = () => {
           <div className="project-card bg-white text-black rounded-none overflow-hidden fade-in-scale">
             <div className="h-64 bg-gradient-to-br from-gray-600 to-gray-300 flex items-center justify-center relative">
               <div className="text-6xl">🚀</div>
-              <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+              {/* <div className="absolute inset-0 bg-black bg-opacity-20"></div> */}
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-bold mb-4">AI CHATBOT PLATFORM</h3>

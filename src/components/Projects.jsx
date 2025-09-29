@@ -1,12 +1,13 @@
 import React from 'react';
 import project1 from '../assets/project1.png';
 import taskmanager from '../assets/taskmanager.png'; // Import task manager image if available
+import travel from '../assets/travel.png'; // Import travel image if available
 
 const Projects = () => {
   // Define project data with Font Awesome icons and specific styling
   const projectData = [
     {
-      image: project1, // Correctly assign the imported image
+      image: project1, 
       title: 'my-luxe-store',
       description: 'A sophisticated e-commerce solution featuring real-time inventory management, advanced analytics, and seamless payment integration. Built for scale and performance.',
       tech: ['REACT', 'currently working on Backend with Node.js', 'and MONGODB'],
@@ -15,13 +16,22 @@ const Projects = () => {
       link:'https://my-luxe-store.vercel.app/'
     },
     {
-      image: taskmanager, // Add an image path if available
+      image: taskmanager, 
       title: 'TASK MANAGEMENT',
       description: 'Collaborative workspace with real-time synchronization, advanced filtering, and intuitive drag-and-drop interface. Designed for modern teams.',
       tech: ['REACT', 'currently working on Backend with Node.js', 'and MONGODB'],
       gradientFrom: 'from-gray-800',
       gradientTo: 'to-gray-500',
       link:'https://task-manager-plum-zeta.vercel.app/'
+    },
+    {
+      image: travel, 
+      title: 'Orango Travels India',
+      description: 'A dynamic travel booking platform, user reviews, and personalized recommendations. Built for seamless user experience.',
+      tech: ['REACT'],
+      gradientFrom: 'from-gray-800',
+      gradientTo: 'to-gray-500',
+      link:'https://travels-one-eta.vercel.app/'
     },
   ];
 

@@ -2,6 +2,8 @@ import React from 'react';
 import project1 from '../assets/project1.png';
 import taskmanager from '../assets/taskmanager.png'; // Import task manager image if available
 import travel from '../assets/travel.png'; // Import travel image if available
+import cafe from '../assets/cafe.png'; // Import cafe image if available
+import tools from '../assets/tools.png';
 
 const Projects = () => {
   // Define project data with Font Awesome icons and specific styling
@@ -33,6 +35,24 @@ const Projects = () => {
       gradientTo: 'to-gray-500',
       link:'https://travels-one-eta.vercel.app/'
     },
+    {
+      image: cafe, 
+      title: 'Dhuladhar River Cafe',
+      description: 'A beautiful cafe website showcasing our riverside location, menu offerings, and authentic dining experience. Built for seamless customer engagement and reservations.',
+      tech: ['HTML5 , CSS3 , JAVASCRIPT'],
+      gradientFrom: 'from-green-800',
+      gradientTo: 'to-blue-500',
+      link: 'https://webtamplate.vercel.app/'
+    },
+    {
+      image: tools, 
+      title: 'MyOnlineTools',
+      description: 'A comprehensive collection of free online utility tools including PDF converters, image tools, text formatters, generators, and more. Built for productivity and ease of use.',
+      tech: ['React', 'Vite', 'JavaScript'],
+      gradientFrom: 'from-blue-600',
+      gradientTo: 'to-purple-600',
+      link: 'https://myonlinetools.site/'
+    }
   ];
 
   return (

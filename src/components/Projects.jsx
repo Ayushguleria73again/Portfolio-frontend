@@ -39,7 +39,7 @@ const Projects = () => {
       image: cafe, 
       title: 'Dhuladhar River Cafe',
       description: 'A beautiful cafe website showcasing our riverside location, menu offerings, and authentic dining experience. Built for seamless customer engagement and reservations.',
-      tech: ['HTML5 , CSS3 , JAVASCRIPT'],
+      tech: ['HTML5' , 'CSS3' , 'JAVASCRIPT'],
       gradientFrom: 'from-green-800',
       gradientTo: 'to-blue-500',
       link: 'https://webtamplate.vercel.app/'

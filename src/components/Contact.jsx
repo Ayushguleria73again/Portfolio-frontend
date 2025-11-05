@@ -39,7 +39,7 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch('https://portfolio-backend-z2xp.onrender.com/api/mail/send', {
+      const response = await fetch('https://portfolio-backend-pi-ashen.vercel.app/api/mail/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

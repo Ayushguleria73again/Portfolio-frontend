@@ -4,6 +4,7 @@ import taskmanager from '../assets/taskmanager.png'; // Import task manager imag
 import travel from '../assets/travel.png'; // Import travel image if available
 import cafe from '../assets/cafe.png'; // Import cafe image if available
 import tools from '../assets/tools.png';
+import bunai from '../assets/bunai.png'
 
 const Projects = () => {
   // Define project data with Font Awesome icons and specific styling
@@ -52,6 +53,15 @@ const Projects = () => {
       gradientFrom: 'from-blue-600',
       gradientTo: 'to-purple-600',
       link: 'https://myonlinetools.site/'
+    },
+    {
+      image: bunai, 
+      title: 'Bunai From The Hills',
+      description: 'A e-commerce website for Bunai From The Hills a knitting seller Website',
+      tech: ['React', 'Vite', 'JavaScript'],
+      gradientFrom: 'from-blue-600',
+      gradientTo: 'to-purple-600',
+      link: 'https://bunai-from-hills.vercel.app/'
     }
   ];
 

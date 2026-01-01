@@ -109,7 +109,7 @@ const About = () => {
             >
               <motion.div className="text-center" variants={textVariants}>
                 <motion.div className="text-3xl font-bold mb-2">
-                  <AnimatedCounter value={4} />
+                  <AnimatedCounter value={6} />
                 </motion.div>
                 <motion.div className="text-sm opacity-60">Projects Completed</motion.div>
               </motion.div>

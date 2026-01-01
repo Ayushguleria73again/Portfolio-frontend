@@ -1,103 +1,139 @@
 import React from 'react';
 import project1 from '../assets/project1.png';
-import taskmanager from '../assets/taskmanager.png'; // Import task manager image if available
-import travel from '../assets/travel.png'; // Import travel image if available
-import cafe from '../assets/cafe.png'; // Import cafe image if available
+import taskmanager from '../assets/taskmanager.png';
+import travel from '../assets/travel.png';
+import cafe from '../assets/cafe.png';
 import tools from '../assets/tools.png';
-import bunai from '../assets/bunai.png'
+import bunai from '../assets/bunai.png';
 
 const Projects = () => {
-  // Define project data with Font Awesome icons and specific styling
   const projectData = [
     {
-      image: project1, 
+      image: project1,
       title: 'my-luxe-store',
-      description: 'A sophisticated e-commerce solution featuring real-time inventory management, advanced analytics, and seamless payment integration. Built for scale and performance.',
-      tech: ['REACT', 'currently working on Backend with Node.js', 'and MONGODB'],
-      gradientFrom: 'from-gray-900',
-      gradientTo: 'to-gray-600',
-      link:'https://my-luxe-store.vercel.app/'
+      description:
+        'A sophisticated e-commerce solution featuring real-time inventory management, advanced analytics, and seamless payment integration.',
+      tech: ['REACT', 'Node.js (WIP)', 'MongoDB'],
+      link: 'https://my-luxe-store.vercel.app/',
     },
     {
-      image: taskmanager, 
+      image: taskmanager,
       title: 'TASK MANAGEMENT',
-      description: 'Collaborative workspace with real-time synchronization, advanced filtering, and intuitive drag-and-drop interface. Designed for modern teams.',
-      tech: ['REACT', 'currently working on Backend with Node.js', 'and MONGODB'],
-      gradientFrom: 'from-gray-800',
-      gradientTo: 'to-gray-500',
-      link:'https://task-manager-plum-zeta.vercel.app/'
+      description:
+        'Collaborative workspace with real-time synchronization, advanced filtering, and drag-and-drop interface.',
+      tech: ['REACT', 'Node.js (WIP)', 'MongoDB'],
+      link: 'https://task-manager-plum-zeta.vercel.app/',
     },
     {
-      image: travel, 
+      image: travel,
       title: 'Orango Travels India',
-      description: 'A dynamic travel booking platform, user reviews, and personalized recommendations. Built for seamless user experience.',
+      description:
+        'A dynamic travel booking platform with user reviews and smooth user experience.',
       tech: ['REACT'],
-      gradientFrom: 'from-gray-800',
-      gradientTo: 'to-gray-500',
-      link:'https://travels-one-eta.vercel.app/'
+      link: 'https://travels-one-eta.vercel.app/',
     },
     {
-      image: cafe, 
+      image: cafe,
       title: 'Dhuladhar River Cafe',
-      description: 'A beautiful cafe website showcasing our riverside location, menu offerings, and authentic dining experience. Built for seamless customer engagement and reservations.',
-      tech: ['HTML5' , 'CSS3' , 'JAVASCRIPT'],
-      gradientFrom: 'from-green-800',
-      gradientTo: 'to-blue-500',
-      link: 'https://webtamplate.vercel.app/'
+      description:
+        'A cafe website showcasing riverside ambience, menu offerings, and customer engagement.',
+      tech: ['HTML5', 'CSS3', 'JavaScript'],
+      link: 'https://webtamplate.vercel.app/',
     },
     {
-      image: tools, 
+      image: tools,
       title: 'MyOnlineTools',
-      description: 'A comprehensive collection of free online utility tools including PDF converters, image tools, text formatters, generators, and more. Built for productivity and ease of use.',
+      description:
+        'A collection of free online productivity tools including converters and generators.',
       tech: ['React', 'Vite', 'JavaScript'],
-      gradientFrom: 'from-blue-600',
-      gradientTo: 'to-purple-600',
-      link: 'https://myonlinetools.site/'
+      link: 'https://myonlinetools.site/',
     },
     {
-      image: bunai, 
+      image: bunai,
       title: 'Bunai From The Hills',
-      description: 'A e-commerce website for Bunai From The Hills a knitting seller Website',
-      tech: ['React', 'Vite', 'JavaScript'],
-      gradientFrom: 'from-blue-600',
-      gradientTo: 'to-purple-600',
-      link: 'https://bunai-from-hills.vercel.app/'
-    }
+      description:
+        'An e-commerce website for a Himalayan knitting brand.',
+      tech: ['React', 'Vite', 'Express.js','MongoDB'],
+      link: 'https://bunai-from-hills.vercel.app/',
+    },
   ];
 
   return (
-    <section id="projects" className="py-32 bg-black"> {/* Ensure background is black as per overall theme */}
+    <section id="projects" className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-7xl font-extralight mb-8 slide-in-up text-glow">PROJECTS</h2>
-          <p className="text-xl opacity-70 slide-in-up">Selected works that define my journey</p>
+        
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl md:text-6xl font-extralight mb-6 text-white">
+            PROJECTS
+          </h2>
+          <p className="text-lg text-white/60">
+            Selected works that define my journey
+          </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        {/* Projects Grid */}
+        <div className="grid lg:grid-cols-2 gap-10">
           {projectData.map((project, index) => (
-            <div key={index} className="project-card bg-white text-black rounded-none overflow-hidden fade-in-scale">
-              {/* Project Card Image/Icon Area */}
-              <div className={`h-64 bg-gradient-to-br ${project.gradientFrom} ${project.gradientTo} flex items-center justify-center relative`}>
-                {project.image && <img src={project.image} alt={project.title} className="w-full object-contain" />} {/* Ensure image is displayed only if it exists */}
+            <div
+              key={index}
+              className="
+                bg-black
+                text-white
+                border border-white/10
+                shadow-[0_10px_40px_rgba(255,255,255,0.08)]
+                hover:shadow-[0_20px_60px_rgba(255,255,255,0.12)]
+                transition-all
+                duration-300
+              "
+            >
+              {/* Image Section */}
+              <div className="h-48 bg-neutral-900 relative flex items-center justify-center overflow-hidden">
+                {/* Subtle vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40"></div>
+
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="relative w-full h-full object-contain p-4 brightness-90"
+                />
               </div>
 
-              {/* Project Card Content */}
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
-                <p className="opacity-70 mb-6 leading-relaxed">{project.description}</p>
-                <div className="flex flex-wrap gap-3 mb-6">
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-3">
+                  {project.title}
+                </h3>
+
+                <p className="text-sm text-white/70 mb-5 leading-relaxed">
+                  {project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-5">
                   {project.tech.map((tech, techIndex) => (
-                    <span key={techIndex} className="border border-black px-3 py-1 text-sm">{tech}</span>
+                    <span
+                      key={techIndex}
+                      className="border border-white/30 px-3 py-1 text-xs uppercase tracking-wide"
+                    >
+                      {tech}
+                    </span>
                   ))}
                 </div>
-                <button className="group flex items-center gap-2 font-semibold hover:gap-4 transition-all duration-300">
-                  <a href={project.link}>VIEW PROJECT</a>
-                  <span className="transform group-hover:translate-x-2 transition-transform duration-300">→</span>
-                </button>
+
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 font-medium hover:gap-4 transition-all"
+                >
+                  VIEW PROJECT
+                  <span>→</span>
+                </a>
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

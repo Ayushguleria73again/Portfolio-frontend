@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Snowfall from 'react-snowfall'
 
 const Hero = () => {
   const containerVariants = {
@@ -74,6 +75,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen animated-bg flex items-center justify-center relative overflow-hidden">
+    <Snowfall color='white'/>
       {/* Floating particles with motion */}
       <div className="absolute inset-0">
         {[...Array(4)].map((_, i) => (

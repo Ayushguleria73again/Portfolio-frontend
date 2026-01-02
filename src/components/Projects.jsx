@@ -1,10 +1,48 @@
-import React from 'react';
-import project1 from '../assets/project1.png';
-import taskmanager from '../assets/taskmanager.png';
-import travel from '../assets/travel.png';
-import cafe from '../assets/cafe.png';
-import tools from '../assets/tools.png';
-import bunai from '../assets/bunai.png';
+import React from 'react'
+import { motion } from 'framer-motion'
+
+import project1 from '../assets/project1.png'
+import taskmanager from '../assets/taskmanager.png'
+import travel from '../assets/travel.png'
+import cafe from '../assets/cafe.png'
+import tools from '../assets/tools.png'
+import bunai from '../assets/bunai.png'
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.25
+    }
+  }
+}
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 60
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      ease: 'easeOut'
+    }
+  }
+}
+
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut'
+    }
+  }
+}
 
 const Projects = () => {
   const projectData = [
@@ -53,90 +91,105 @@ const Projects = () => {
       title: 'Bunai From The Hills',
       description:
         'An e-commerce website for a Himalayan knitting brand.',
-      tech: ['React', 'Vite', 'Express.js','MongoDB'],
+      tech: ['React', 'Vite', 'Express.js', 'MongoDB'],
       link: 'https://bunai-from-hills.vercel.app/',
     },
-  ];
+  ]
 
   return (
-    <section id="projects" className="py-24 bg-black">
-      <div className="max-w-7xl mx-auto px-6">
-        
+    <section id="projects" className="py-32 bg-black text-white">
+      <motion.div
+        className="max-w-7xl mx-auto px-6"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+
         {/* Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-extralight mb-6 text-white">
+        <motion.div className="text-center mb-20" variants={textVariants}>
+          <h2 className="text-5xl md:text-7xl font-extralight mb-6">
             PROJECTS
           </h2>
-          <p className="text-lg text-white/60">
+          <p className="text-lg opacity-60">
             Selected works that define my journey
           </p>
-        </div>
+        </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid lg:grid-cols-2 gap-10">
+        <motion.div
+          className="grid lg:grid-cols-2 gap-12"
+          variants={containerVariants}
+        >
           {projectData.map((project, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={cardVariants}
+              whileHover={{
+                y: -8,
+                boxShadow: '0 20px 60px rgba(255,255,255,0.12)'
+              }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
               className="
                 bg-black
-                text-white
                 border border-white/10
+                overflow-hidden
                 shadow-[0_10px_40px_rgba(255,255,255,0.08)]
-                hover:shadow-[0_20px_60px_rgba(255,255,255,0.12)]
-                transition-all
-                duration-300
               "
             >
               {/* Image Section */}
-              <div className="h-48 bg-neutral-900 relative flex items-center justify-center overflow-hidden">
-                {/* Subtle vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40"></div>
-
+              <motion.div
+                className="h-52 bg-neutral-900 relative overflow-hidden"
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/40" />
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="relative w-full h-full object-contain p-4 brightness-90"
+                  className="w-full h-full object-contain p-6 opacity-90"
                 />
-              </div>
+              </motion.div>
 
               {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-3">
+              <motion.div className="p-8 space-y-5" variants={textVariants}>
+                <h3 className="text-xl font-semibold">
                   {project.title}
                 </h3>
 
-                <p className="text-sm text-white/70 mb-5 leading-relaxed">
+                <p className="text-sm opacity-70 leading-relaxed">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.tech.map((tech, techIndex) => (
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((tech, i) => (
                     <span
-                      key={techIndex}
-                      className="border border-white/30 px-3 py-1 text-xs uppercase tracking-wide"
+                      key={i}
+                      className="border border-white/30 px-3 py-1 text-xs tracking-wide"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
 
-                <a
+                <motion.a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-medium hover:gap-4 transition-all"
+                  whileHover={{ x: 6 }}
+                  transition={{ duration: 0.3 }}
+                  className="inline-flex items-center gap-2 font-medium"
                 >
-                  VIEW PROJECT
-                  <span>→</span>
-                </a>
-              </div>
-            </div>
+                  VIEW PROJECT <span>→</span>
+                </motion.a>
+              </motion.div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
     </section>
-  );
-};
+  )
+}
 
-export default Projects;
+export default Projects

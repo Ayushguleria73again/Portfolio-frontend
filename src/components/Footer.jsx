@@ -29,12 +29,12 @@ const Footer = () => {
               AYUSH.
             </motion.h2>
             <p className="text-white/40 text-lg md:text-xl font-light ml-2">
-              Full Stack Developer 
+              Full Stack Developer
             </p>
           </div>
 
           {/* Links */}
-          <div className="flex gap-12 md:gap-24">
+          <div className="w-full md:w-auto grid grid-cols-2 gap-8 md:flex md:gap-24">
             <div>
               <h4 className="text-white/40 uppercase text-xs tracking-widest mb-6">Socials</h4>
               <ul className="space-y-3">

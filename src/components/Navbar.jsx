@@ -89,24 +89,24 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4">
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className={`
-          relative w-full max-w-5xl rounded-full border border-white/10
+          relative w-full max-w-4xl rounded-full border border-white/10
           backdrop-blur-xl transition-all duration-300
           ${scrolled
-            ? 'bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.3)] py-3 px-6'
-            : 'bg-transparent border-transparent py-4 px-6'
+            ? 'bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.3)] py-2 px-6'
+            : 'bg-transparent border-transparent py-3 px-6'
           }
         `}
       >
         <div className="flex justify-between items-center relative z-20">
           {/* Logo */}
           <motion.div
-            className="text-2xl font-bold tracking-tighter"
+            className="text-xl font-bold tracking-tighter"
             whileHover={{ scale: 1.05 }}
           >
             <span className="text-white">AG</span>

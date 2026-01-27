@@ -42,7 +42,7 @@ const About = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
             <div className="absolute bottom-6 left-6">
               <h3 className="text-3xl font-bold text-white mb-1">Ayush Guleria</h3>
-              <p className="text-white/60 font-mono text-sm">Frontend Developer</p>
+              <p className="text-white/60 font-mono text-sm">Full Stack Developer</p>
               <p className="text-white/50 text-xs mt-2">Himachal Pradesh, India</p>
             </div>
           </motion.div>

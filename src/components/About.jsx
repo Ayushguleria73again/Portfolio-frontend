@@ -72,7 +72,7 @@ const About = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="bg-[#0f0f0f] border border-white/10 rounded-3xl p-6 flex flex-col items-center justify-center hover:border-white/30 transition-colors"
           >
-            <span className="text-5xl font-bold text-white mb-2">20+</span>
+            <span className="text-5xl font-bold text-white mb-2">7+</span>
             <span className="text-white/50 text-sm uppercase tracking-wider">Projects Completed</span>
           </motion.div>
 

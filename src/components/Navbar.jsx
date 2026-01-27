@@ -55,8 +55,7 @@ const Navbar = () => {
         { name: 'Skills', href: '#skills' },
         { name: 'Tech Stack', href: '#tech-stack' }
       ]
-    },
-    { name: 'Contact', href: '#contact' }
+    }
   ];
 
   const menuVariants = {

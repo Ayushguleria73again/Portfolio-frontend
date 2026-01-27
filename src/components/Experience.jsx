@@ -10,9 +10,16 @@ const Experience = () => {
             description: 'Developing scalable web applications and enhancing user interfaces with modern frontend technologies. Collaborating with cross-functional teams to deliver high-quality software solutions.',
         },
         {
+            company: "NEWUS, Dharamshala",
+            role: "Full Stack Software Engineering Crash Course",
+            period: "2024 - 2025",
+            description:
+                "Completed an intensive Full Stack Software Engineering crash course at NEWUS Dharamshala, focused on building real-world applications using React, Next.js, Node.js, Express, MongoDB, REST APIs, authentication systems, and scalable backend architectures with hands-on project experience.",
+        },
+        {
             company: 'IGNOU',
             role: 'Bachelor of Computer Applications (BCA)',
-            period: '2022 - 2025 (Drop Out)',
+            period: '2022 - 2023 (Drop Out)',
             description: 'Pursued foundational computer science coursework before strategically pivoting to focus entirely on practical, hands-on software development and real-world project building.',
         },
         {

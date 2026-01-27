@@ -1,111 +1,86 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import {
-  faLinkedin,
-  faGithub,
-  faTwitter,
-  faInstagram,
-} from '@fortawesome/free-brands-svg-icons';
+import { faHeart, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 const Footer = () => {
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const socialVariants = {
-    hover: {
-      scale: 1.2,
-      rotate: 360,
-      transition: { duration: 0.3 }
-    }
-  };
-
-  const heartVariants = {
-    animate: {
-      scale: [1, 1.2, 1],
-      transition: {
-        duration: 1.5,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
-    <footer className="py-12 animated-bg text-white border-t border-gray-800">
-      <motion.div
-        className="max-w-7xl mx-auto px-6"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
-      >
-        <motion.div className="text-center" variants={containerVariants}>
-          <motion.div className="mb-6" variants={itemVariants}>
-            <motion.p className="text-lg mb-4" variants={itemVariants}>
-              Let's create something amazing together
-            </motion.p>
-            <motion.div
-              className="flex justify-center gap-6 mb-8"
-              variants={containerVariants}
-            >
-              {[
-                { icon: faLinkedin, href: "https://www.linkedin.com/in/ayush-guleria-162a83206/" },
-                { icon: faGithub, href: "https://github.com/Ayushguleria73again" },
-                { icon: faTwitter, href: "#" },
-                { icon: faInstagram, href: "https://www.instagram.com/_ayush_guleria_/" }
-              ].map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  variants={itemVariants && socialVariants}
-                  whileHover="hover"
-                  className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white text-white hover:text-black transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
-                >
-                  <FontAwesomeIcon icon={social.icon} className="text-xl" />
-                </motion.a>
-              ))}
-            </motion.div>
-          </motion.div>
+    <footer className="bg-black text-white relative pt-20 pb-10 overflow-hidden">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent pointer-events-none" />
 
-          <motion.div
-            className="border-t border-gray-800 pt-8"
-            variants={itemVariants}
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-10">
+          {/* Brand / Name */}
+          <div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-[12vw] md:text-[8vw] font-bold leading-none tracking-tighter text-white"
+            >
+              AYUSH.
+            </motion.h2>
+            <p className="text-white/40 text-lg md:text-xl font-light ml-2">
+              Full Stack Developer 
+            </p>
+          </div>
+
+          {/* Links */}
+          <div className="flex gap-12 md:gap-24">
+            <div>
+              <h4 className="text-white/40 uppercase text-xs tracking-widest mb-6">Socials</h4>
+              <ul className="space-y-3">
+                {['LinkedIn', 'GitHub', 'Twitter', 'Instagram'].map((item) => (
+                  <li key={item}>
+                    <a href="#" className="text-lg hover:text-white transition-colors">{item}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white/40 uppercase text-xs tracking-widest mb-6">Sitemap</h4>
+              <ul className="space-y-3">
+                {['Home', 'About', 'Experience', 'Projects', 'Contact'].map((item) => (
+                  <li key={item}>
+                    <a href={`#${item.toLowerCase()}`} className="text-lg hover:text-white transition-colors">{item}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-white/30 text-sm">
+            © {new Date().getFullYear()} Ayush Guleria. All Rights Reserved.
+          </p>
+
+          <div className="flex items-center gap-2 text-white/30 text-sm">
+            <span>Made with</span>
+            <FontAwesomeIcon icon={faHeart} className="text-red-500 animate-pulse" />
+            <span>in India</span>
+          </div>
+
+          <button
+            onClick={scrollToTop}
+            className="group flex items-center gap-2 text-white/60 hover:text-white transition-colors"
           >
-            <motion.p className="text-sm opacity-70" variants={itemVariants}>
-              © 2025 Ayush Guleria. Crafted with{' '}
-              <motion.span
-                variants={heartVariants}
-                animate="animate"
-                className="inline-block"
-              >
-                <FontAwesomeIcon icon={faHeart} className="text-red-500" />
-              </motion.span>{' '}
-              and lots of coffee.
-            </motion.p>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+            <span className="text-sm uppercase tracking-wider">Back to Top</span>
+            <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+              <FontAwesomeIcon icon={faArrowUp} className="text-xs" />
+            </div>
+          </button>
+        </div>
+      </div>
     </footer>
   );
 };

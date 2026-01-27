@@ -6,6 +6,8 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null); // For mobile
+  const [hoveredDropdown, setHoveredDropdown] = useState(null); // For desktop
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +23,7 @@ const Navbar = () => {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
   };
 
   useEffect(() => {
@@ -37,9 +40,22 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Tech Stack', href: '#tech-stack' },
-    { name: 'Skills', href: '#skills' },
+    {
+      name: 'Work',
+      type: 'dropdown',
+      items: [
+        { name: 'Experience', href: '#experience' },
+        { name: 'Projects', href: '#projects' }
+      ]
+    },
+    {
+      name: 'Expertise',
+      type: 'dropdown',
+      items: [
+        { name: 'Skills', href: '#skills' },
+        { name: 'Tech Stack', href: '#tech-stack' }
+      ]
+    },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -54,6 +70,22 @@ const Navbar = () => {
       opacity: 0,
       scale: 0.95,
       transition: { duration: 0.1, ease: "easeIn" }
+    }
+  };
+
+  const dropdownVariants = {
+    hidden: { opacity: 0, y: 10, display: 'none' },
+    visible: {
+      opacity: 1,
+      y: 0,
+      display: 'block',
+      transition: { duration: 0.2, ease: "easeOut" }
+    },
+    exit: {
+      opacity: 0,
+      y: 10,
+      transition: { duration: 0.15, ease: "easeIn" },
+      transitionEnd: { display: 'none' }
     }
   };
 
@@ -79,19 +111,60 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
           >
             <span className="text-white">AG</span>
-            <span className="text-blue-500">.</span>
+            <span className="text-white/50">.</span>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-md">
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="px-5 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
-              >
-                {item.name}
-              </a>
+              item.type === 'dropdown' ? (
+                <div
+                  key={item.name}
+                  className="relative group"
+                  onMouseEnter={() => setHoveredDropdown(item.name)}
+                  onMouseLeave={() => setHoveredDropdown(null)}
+                >
+                  <button className="px-5 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 flex items-center gap-1">
+                    {item.name}
+                    <motion.span
+                      animate={{ rotate: hoveredDropdown === item.name ? 180 : 0 }}
+                      className="text-[10px]"
+                    >
+                      ▼
+                    </motion.span>
+                  </button>
+
+                  <AnimatePresence>
+                    {hoveredDropdown === item.name && (
+                      <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        variants={dropdownVariants}
+                        className="absolute top-full left-0 mt-2 w-48 bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-xl overflow-hidden py-2"
+                      >
+                        {item.items.map((subItem) => (
+                          <a
+                            key={subItem.name}
+                            href={subItem.href}
+                            className="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+                          >
+                            {subItem.name}
+                          </a>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="px-5 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  {item.name}
+                </a>
+              )
             ))}
           </div>
 
@@ -140,14 +213,47 @@ const Navbar = () => {
               >
                 <div className="flex flex-col space-y-2">
                   {navItems.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      onClick={closeMobileMenu}
-                      className="px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all text-center font-medium"
-                    >
-                      {item.name}
-                    </a>
+                    item.type === 'dropdown' ? (
+                      <div key={item.name} className="flex flex-col">
+                        <button
+                          onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+                          className="px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all text-center font-medium flex items-center justify-center gap-2"
+                        >
+                          {item.name}
+                          <motion.span animate={{ rotate: activeDropdown === item.name ? 180 : 0 }}>▼</motion.span>
+                        </button>
+                        <AnimatePresence>
+                          {activeDropdown === item.name && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden bg-white/5 rounded-xl mb-2"
+                            >
+                              {item.items.map((subItem) => (
+                                <a
+                                  key={subItem.name}
+                                  href={subItem.href}
+                                  onClick={closeMobileMenu}
+                                  className="block px-4 py-3 text-sm text-gray-400 hover:text-white text-center"
+                                >
+                                  {subItem.name}
+                                </a>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        onClick={closeMobileMenu}
+                        className="px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all text-center font-medium"
+                      >
+                        {item.name}
+                      </a>
+                    )
                   ))}
                 </div>
               </motion.div>

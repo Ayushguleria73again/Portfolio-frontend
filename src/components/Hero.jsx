@@ -75,7 +75,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen animated-bg flex items-center justify-center relative overflow-hidden">
-    <Snowfall color='white'/>
+      <Snowfall color='white' />
       {/* Floating particles with motion */}
       <div className="absolute inset-0">
         {[...Array(4)].map((_, i) => (
@@ -96,44 +96,44 @@ const Hero = () => {
         ))}
       </div>
 
-      <motion.div 
-        className="text-center px-6 z-10"
+      <motion.div
+        className="text-center px-6 z-10 relative"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <motion.div className="mb-8" variants={textVariants}>
-          <motion.h1 
-            className="text-6xl md:text-8xl font-extralight mb-4"
+        <motion.div className="mb-6" variants={textVariants}>
+          <motion.h1
+            className="text-6xl md:text-9xl font-thin tracking-tighter mb-2"
             variants={textVariants}
           >
             AYUSH
           </motion.h1>
-          <motion.h1 
-            className="text-6xl md:text-8xl font-bold text-glow"
+          <motion.h1
+            className="text-6xl md:text-9xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500"
             variants={textVariants}
           >
             GULERIA
           </motion.h1>
         </motion.div>
-        
-        <motion.div 
-          className="text-xl md:text-2xl font-light mb-12 mx-auto typewriter"
+
+        <motion.div
+          className="text-xl md:text-3xl font-light mb-10 mx-auto tracking-widest uppercase text-gray-400"
           variants={textVariants}
         >
           Full Stack Software Engineer
         </motion.div>
-        
-        <motion.p 
-          className="text-lg md:text-xl font-light mb-12 opacity-80 max-w-3xl mx-auto leading-relaxed"
+
+        <motion.p
+          className="text-base md:text-lg font-light mb-14 opacity-60 max-w-2xl mx-auto leading-relaxed"
           variants={textVariants}
         >
           Crafting digital experiences that blend innovation with elegance.
           Where code meets creativity, and ideas transform into reality.
         </motion.p>
-        
-        <motion.div 
-          className="flex flex-col sm:flex-row gap-6 justify-center"
+
+        <motion.div
+          className="flex flex-col sm:flex-row gap-8 justify-center items-center"
           variants={containerVariants}
         >
           <motion.a
@@ -141,19 +141,25 @@ const Hero = () => {
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
-            className="group relative px-8 py-4 border-2 border-white rounded-full hover:bg-white hover:text-black transition-all duration-500"
+            className="group relative px-10 py-4 bg-white text-black rounded-full overflow-hidden"
           >
-            <span className="relative z-10">EXPLORE WORK</span>
+            <span className="relative z-10 font-medium tracking-wide">EXPLORE WORK</span>
+            <motion.div
+              className="absolute inset-0 bg-gray-200"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+            />
           </motion.a>
-          
+
           <motion.a
             href="#contact"
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
-            className="group relative px-8 py-4 bg-white text-black hover:bg-transparent hover:text-white border-2 border-white rounded-full transition-all duration-500"
+            className="group relative px-10 py-4 text-white border border-white/20 rounded-full hover:border-white/50 transition-colors"
           >
-            <span className="relative z-10">GET IN TOUCH</span>
+            <span className="relative z-10 font-medium tracking-wide">GET IN TOUCH</span>
           </motion.a>
         </motion.div>
       </motion.div>

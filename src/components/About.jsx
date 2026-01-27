@@ -77,7 +77,7 @@ const About = () => {
 
   return (
     <section id="about" className="py-32 animated-bg text-white relative">
-      <motion.div 
+      <motion.div
         className="max-w-7xl mx-auto px-6"
         variants={containerVariants}
         initial="hidden"
@@ -85,14 +85,14 @@ const About = () => {
         viewport={{ once: true, amount: 0.3 }}
       >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div variants={textVariants}>
-            <motion.h2 
-              className="text-5xl md:text-7xl font-extralight mb-8 border-animate"
+          <motion.div variants={textVariants} className="bg-white/5 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-white/10">
+            <motion.h2
+              className="text-4xl md:text-6xl font-thin mb-8 tracking-tight"
               variants={textVariants}
             >
-              ABOUT
+              ABOUT ME
             </motion.h2>
-            <motion.div className="space-y-6 text-lg leading-relaxed" variants={textVariants}>
+            <motion.div className="space-y-6 text-lg leading-relaxed font-light" variants={textVariants}>
               <motion.p className="opacity-80" variants={textVariants}>
                 I'm a passionate architect of digital experiences, specializing in full-stack development
                 with a keen eye for design and user experience. My journey spans across modern web technologies,
@@ -103,54 +103,55 @@ const About = () => {
                 intuitive, and purposeful. I transform complex problems into elegant solutions.
               </motion.p>
             </motion.div>
-            <motion.div 
-              className="mt-12 grid grid-cols-3 gap-8"
+
+            <motion.div
+              className="mt-12 flex flex-wrap gap-8 md:gap-12 border-t border-white/10 pt-8"
               variants={containerVariants}
             >
-              <motion.div className="text-center" variants={textVariants}>
-                <motion.div className="text-3xl font-bold mb-2">
-                  <AnimatedCounter value={6} />
+              <motion.div variants={textVariants}>
+                <motion.div className="text-4xl font-bold mb-1 gradient-text">
+                  <AnimatedCounter value={6} />+
                 </motion.div>
-                <motion.div className="text-sm opacity-60">Projects Completed</motion.div>
+                <motion.div className="text-xs tracking-widest opacity-60 uppercase">Projects</motion.div>
               </motion.div>
-              <motion.div className="text-center" variants={textVariants}>
-                <motion.div className="text-3xl font-bold mb-2">
-                  <AnimatedCounter value={2} />
+              <motion.div variants={textVariants}>
+                <motion.div className="text-4xl font-bold mb-1 gradient-text">
+                  <AnimatedCounter value={2} />+
                 </motion.div>
-                <motion.div className="text-sm opacity-60">Years Experience</motion.div>
+                <motion.div className="text-xs tracking-widest opacity-60 uppercase">Years Exp.</motion.div>
               </motion.div>
-              <motion.div className="text-center" variants={textVariants}>
-                <motion.div className="text-3xl font-bold mb-2">
+              <motion.div variants={textVariants}>
+                <motion.div className="text-4xl font-bold mb-1 gradient-text">
                   <AnimatedCounter value={100} />%
                 </motion.div>
-                <motion.div className="text-sm opacity-60">Client Satisfaction</motion.div>
+                <motion.div className="text-xs tracking-widest opacity-60 uppercase">Satisfaction</motion.div>
               </motion.div>
             </motion.div>
           </motion.div>
-          
+
           <motion.div variants={imageVariants} className="relative">
             <motion.div className="relative">
               {/* Pulse rings */}
-              <motion.div 
-                className="absolute inset-0 border-2 border-gray-700 rounded-full"
+              <motion.div
+                className="absolute inset-0 border border-white/20 rounded-full"
                 animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.5, 0.2, 0.5],
+                  scale: [1, 1.1, 1],
+                  opacity: [0.3, 0.1, 0.3],
                 }}
                 transition={{
-                  duration: 3,
+                  duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
               />
-              <motion.div 
-                className="absolute inset-4 border border-gray-700 rounded-full"
+              <motion.div
+                className="absolute inset-8 border border-white/10 rounded-full"
                 animate={{
-                  scale: [1, 1.3, 1],
-                  opacity: [0.3, 0.1, 0.3],
+                  scale: [1, 1.2, 1],
+                  opacity: [0.2, 0.05, 0.2],
                 }}
                 transition={{
-                  duration: 3,
+                  duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut",
                   delay: 0.5
@@ -158,24 +159,21 @@ const About = () => {
               />
 
               {/* Main circle */}
-              <motion.div 
-                className="w-96 h-96 mx-auto bg-black rounded-full flex items-center justify-center relative overflow-hidden"
-                whileHover={{ scale: 1.05 }}
+              <motion.div
+                className="w-72 h-72 md:w-96 md:h-96 mx-auto bg-black rounded-full flex items-center justify-center relative overflow-hidden grayscale hover:grayscale-0 transition-all duration-700"
+                whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <motion.img 
-                  src={ayush} 
-                  alt="Ayush" 
-                  className="w-full h-full object-cover rounded-full"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
+                <motion.img
+                  src={ayush}
+                  alt="Ayush"
+                  className="w-full h-full object-cover rounded-full opacity-90 hover:opacity-100 transition-opacity"
                 />
-                
+
                 {/* Orbiting elements */}
-                <motion.div className="absolute inset-0">
-                <div className="skill-orbit absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -ml-2 -mt-2"></div>
-                  <div className="skill-orbit absolute top-1/2 left-1/2 w-3 h-3 bg-gray-400 rounded-full -ml-1.5 -mt-1.5" style={{ animationDelay: '-5s', animationDuration: '15s' }}></div>
-                  <div className="skill-orbit absolute top-1/2 left-1/2 w-2 h-2 bg-gray-600 rounded-full -ml-1 -mt-1" style={{ animationDelay: '-10s', animationDuration: '25s' }}></div>
+                <motion.div className="absolute inset-0 pointer-events-none">
+                  <div className="skill-orbit absolute top-1/2 left-1/2 w-3 h-3 bg-white/80 rounded-full -ml-1.5 -mt-1.5 shadow-[0_0_10px_rgba(255,255,255,0.8)]"></div>
+                  <div className="skill-orbit absolute top-1/2 left-1/2 w-2 h-2 bg-gray-400 rounded-full -ml-1 -mt-1" style={{ animationDelay: '-5s', animationDuration: '15s' }}></div>
                 </motion.div>
               </motion.div>
             </motion.div>

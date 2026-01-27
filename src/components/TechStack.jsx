@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion }  from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faReact,
@@ -19,35 +19,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const TechStack = () => {
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    },
-    hover: {
-      scale: 1.1,
-      transition: {
-        type: "spring",
-        stiffness: 300
-      }
-    }
-  };
-
   const techItems = [
     { icon: faReact, name: 'React' },
     { icon: faNodeJs, name: 'Node.js' },
@@ -63,33 +34,45 @@ const TechStack = () => {
     { icon: faFire, name: 'Firebase' },
   ];
 
+  // Duplicate items for seamless loop
+  const marqueeItems = [...techItems, ...techItems, ...techItems];
+
   return (
-    <section id="tech-stack" className="py-32 animated-bg text-white">
-      <motion.div
-        className="max-w-7xl mx-auto px-6"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-      >
+    <section id="tech-stack" className="py-24 animated-bg text-white overflow-hidden relative">
+      <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
         <motion.h2
-          className="text-5xl md:text-7xl font-extralight mb-12 text-center text-glow"
-          variants={itemVariants}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-light tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400"
         >
-          TECH STACK
+          TECHNOLOGIES
         </motion.h2>
-             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-20">
-          {techItems.map((item, index) => (
-            <div key={index} className="tech-item text-center slide-in-up group" style={{ animationDelay: `${index * 0.1}s` }}>
-              <div className="w-20 h-20 mx-auto mb-4 bg-gray-800 rounded-2xl shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <FontAwesomeIcon icon={item.icon} className="text-3xl" />
+      </div>
+
+      <div className="relative w-full">
+        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-10" />
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black to-transparent z-10" />
+
+        <motion.div
+          className="flex gap-16 w-max"
+          animate={{ x: [0, -1000] }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        >
+          {marqueeItems.map((item, index) => (
+            <div key={index} className="flex flex-col items-center gap-4 group opacity-50 hover:opacity-100 transition-opacity duration-300">
+              <div className="text-4xl md:text-5xl text-gray-300 group-hover:text-white transition-colors">
+                <FontAwesomeIcon icon={item.icon} />
               </div>
-              <p className="font-semibold">{item.name}</p>
+              <span className="text-sm font-medium tracking-wider">{item.name}</span>
             </div>
           ))}
-        </div>
-       
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };

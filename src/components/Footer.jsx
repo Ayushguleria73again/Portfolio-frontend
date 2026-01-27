@@ -53,7 +53,7 @@ const Footer = () => {
 
   return (
     <footer className="py-12 animated-bg text-white border-t border-gray-800">
-      <motion.div 
+      <motion.div
         className="max-w-7xl mx-auto px-6"
         variants={containerVariants}
         initial="hidden"
@@ -65,7 +65,7 @@ const Footer = () => {
             <motion.p className="text-lg mb-4" variants={itemVariants}>
               Let's create something amazing together
             </motion.p>
-            <motion.div 
+            <motion.div
               className="flex justify-center gap-6 mb-8"
               variants={containerVariants}
             >
@@ -78,9 +78,9 @@ const Footer = () => {
                 <motion.a
                   key={index}
                   href={social.href}
-                  variants={itemVariants&&socialVariants}
+                  variants={itemVariants && socialVariants}
                   whileHover="hover"
-                  className="w-12 h-12 bg-black rounded-full flex items-center justify-center hover:bg-opacity-20 transition-all duration-300"
+                  className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white text-white hover:text-black transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
                 >
                   <FontAwesomeIcon icon={social.icon} className="text-xl" />
                 </motion.a>
@@ -88,7 +88,7 @@ const Footer = () => {
             </motion.div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="border-t border-gray-800 pt-8"
             variants={itemVariants}
           >

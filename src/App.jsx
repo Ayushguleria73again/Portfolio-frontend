@@ -8,6 +8,8 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import LoadingScreen from './components/LoadingScreen';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   useEffect(() => {
@@ -80,17 +82,21 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-black text-white overflow-x-hidden">
-      <Navbar />
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
-      <TechStack />
-      <Skills />
-      <Contact />
-      <Footer />
-    </div>
+    <>
+      <LoadingScreen />
+      <CustomCursor />
+      <div className="bg-black text-white overflow-x-hidden">
+        <Navbar />
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <TechStack />
+        <Skills />
+        <Contact />
+        <Footer />
+      </div>
+    </>
   );
 }
 

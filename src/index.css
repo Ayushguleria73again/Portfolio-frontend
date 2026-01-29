@@ -10,6 +10,16 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Hide default cursor on desktop for custom cursor */
+@media (pointer: fine) {
+
+    body,
+    a,
+    button {
+        cursor: none !important;
+    }
+}
+
 /* Custom CSS from original HTML */
 .animated-bg {
     background: linear-gradient(-45deg, #0a0a0a, #202020, #0a0a0a, #2d2d2d);

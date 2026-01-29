@@ -5,18 +5,42 @@ import { faPaperPlane, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-soli
 import { faGithub, faLinkedin, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const Contact = () => {
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
-    // Simulate API call
-    setTimeout(() => {
-      setStatus('success');
-      setFormState({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus('idle'), 3000);
-    }, 1500);
+    setErrorMessage('');
+
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${apiUrl}/api/mail/send`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setStatus('success');
+        setFormState({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setErrorMessage(data.message || 'Failed to send message. Please try again.');
+        setTimeout(() => setStatus('idle'), 5000);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setStatus('error');
+      setErrorMessage('Network error. Please check your connection and try again.');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   const handleChange = (e) => {
@@ -107,6 +131,18 @@ const Contact = () => {
                 />
               </div>
               <div className="group">
+                <label className="block text-xs uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-white transition-colors">Subject</label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formState.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-transparent border-b border-white/10 py-4 text-white focus:outline-none focus:border-white transition-colors placeholder-white/20 text-lg"
+                  placeholder="Project Inquiry"
+                />
+              </div>
+              <div className="group">
                 <label className="block text-xs uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-white transition-colors">Message</label>
                 <textarea
                   name="message"
@@ -127,13 +163,29 @@ const Contact = () => {
                 {status === 'submitting' ? (
                   <span>SENDING...</span>
                 ) : status === 'success' ? (
-                  <span>SENT SUCCESSFULLY!</span>
+                  <span>✓ SENT SUCCESSFULLY!</span>
+                ) : status === 'error' ? (
+                  <span>✗ FAILED - TRY AGAIN</span>
                 ) : (
                   <>
                     SEND MESSAGE <FontAwesomeIcon icon={faPaperPlane} />
                   </>
                 )}
               </button>
+
+              {/* Error Message */}
+              <AnimatePresence>
+                {status === 'error' && errorMessage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="text-red-400 text-sm text-center mt-2"
+                  >
+                    {errorMessage}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </form>
           </motion.div>
         </div>

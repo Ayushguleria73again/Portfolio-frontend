@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Snowfall from 'react-snowfall'
+import Snowfall from 'react-snowfall';
+import { generateResume } from '../utils/generateResume';
 
 const Hero = () => {
   const containerVariants = {

@@ -1,0 +1,21 @@
+{
+  "name": "Ayush Guleria Portfolio",
+  "short_name": "AG Portfolio",
+  "description": "Full Stack Software Engineer Portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { generateResume } from '../utils/generateResume';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -55,7 +56,8 @@ const Navbar = () => {
         { name: 'Skills', href: '#skills' },
         { name: 'Tech Stack', href: '#tech-stack' }
       ]
-    }
+    },
+    { name: 'Resume', type: 'action', action: generateResume }
   ];
 
   const menuVariants = {
@@ -155,6 +157,14 @@ const Navbar = () => {
                     )}
                   </AnimatePresence>
                 </div>
+              ) : item.type === 'action' ? (
+                <button
+                  key={item.name}
+                  onClick={item.action}
+                  className="px-5 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  {item.name}
+                </button>
               ) : (
                 <a
                   key={item.name}
@@ -243,6 +253,17 @@ const Navbar = () => {
                           )}
                         </AnimatePresence>
                       </div>
+                    ) : item.type === 'action' ? (
+                      <button
+                        key={item.name}
+                        onClick={() => {
+                          item.action();
+                          closeMobileMenu();
+                        }}
+                        className="px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all text-center font-medium w-full"
+                      >
+                        {item.name}
+                      </button>
                     ) : (
                       <a
                         key={item.name}

@@ -7,14 +7,11 @@ const CustomCursor = () => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        // Check if device is mobile/touch
         const checkMobile = () => {
             setIsMobile(window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768);
         };
-
         checkMobile();
         window.addEventListener('resize', checkMobile);
-
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
@@ -53,13 +50,12 @@ const CustomCursor = () => {
 
     return (
         <>
-            {/* Main cursor */}
             <motion.div
                 className="custom-cursor"
                 animate={{
-                    x: mousePosition.x - 10,
-                    y: mousePosition.y - 10,
-                    scale: isHovering ? 1.5 : 1,
+                    x: mousePosition.x - 4,
+                    y: mousePosition.y - 4,
+                    scale: isHovering ? 2.5 : 1,
                 }}
                 transition={{
                     type: 'spring',
@@ -69,38 +65,12 @@ const CustomCursor = () => {
                 }}
                 style={{
                     position: 'fixed',
-                    width: '20px',
-                    height: '20px',
+                    width: '8px',
+                    height: '8px',
                     borderRadius: '50%',
-                    border: '2px solid white',
+                    backgroundColor: 'white',
                     pointerEvents: 'none',
                     zIndex: 9999,
-                    mixBlendMode: 'difference',
-                }}
-            />
-
-            {/* Cursor trail/follower */}
-            <motion.div
-                className="custom-cursor-follower"
-                animate={{
-                    x: mousePosition.x - 20,
-                    y: mousePosition.y - 20,
-                    scale: isHovering ? 1.8 : 1,
-                }}
-                transition={{
-                    type: 'spring',
-                    stiffness: 150,
-                    damping: 15,
-                    mass: 0.8,
-                }}
-                style={{
-                    position: 'fixed',
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    border: '1px solid rgba(255, 255, 255, 0.3)',
-                    pointerEvents: 'none',
-                    zIndex: 9998,
                     mixBlendMode: 'difference',
                 }}
             />

@@ -1,15 +1,9 @@
 import React, { useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Projects from './components/Projects';
-import TechStack from './components/TechStack';
-import Experience from './components/Experience';
-import Skills from './components/Skills';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import LoadingScreen from './components/LoadingScreen';
-import CustomCursor from './components/CustomCursor';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoadingScreen from './components/common/LoadingScreen';
+import CustomCursor from './components/common/CustomCursor';
+import Home from './components/Home';
+import NotFound from './pages/NotFound';
 
 function App() {
   useEffect(() => {
@@ -31,19 +25,22 @@ function App() {
 
     window.addEventListener('scroll', handleScroll);
 
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+    // Smooth scrolling for anchor links (only relevant on Home page)
+    const handleAnchorClick = (e) => {
+      const anchor = e.target.closest('a[href^="#"]');
+      if (anchor) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(anchor.getAttribute('href'));
         if (target) {
           target.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
           });
         }
-      });
-    });
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -59,7 +56,8 @@ function App() {
       });
     }, observerOptions);
 
-    // Observe all animated elements
+    // Observe all animated elements (re-run logic if needed, but for SPA one-time observation might be tricky if content changes)
+    // For now, observing what's present
     document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up, .fade-in-scale').forEach(el => {
       observer.observe(el);
     });
@@ -68,36 +66,25 @@ function App() {
     if (nav) {
       nav.classList.add('visible');
     }
-    document.querySelector('.slide-in-left')?.classList.add('visible');
-    document.querySelector('.slide-in-right')?.classList.add('visible');
-    document.querySelector('.slide-in-up')?.classList.add('visible');
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      // Disconnect observer on unmount
-      document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up, .fade-in-scale').forEach(el => {
-        observer.unobserve(el);
-      });
+      document.removeEventListener('click', handleAnchorClick);
+      observer.disconnect();
     };
   }, []);
 
   return (
-    <>
+    <Router>
       <LoadingScreen />
       <CustomCursor />
-      <div className="bg-black text-white overflow-x-hidden">
-        <Navbar />
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <TechStack />
-        <Skills />
-        <Contact />
-        <Footer />
-      </div>
-    </>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
+

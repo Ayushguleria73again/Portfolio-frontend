@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faEnvelope, faMapMarkerAlt, faCopy } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import Toast from '../common/Toast';
+import RippleButton from '../common/RippleButton';
 
 const Contact = () => {
   const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle, submitting, success, error
   const [errorMessage, setErrorMessage] = useState('');
+  const [showToast, setShowToast] = useState(false);
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,12 +83,19 @@ const Contact = () => {
             </motion.p>
 
             <div className="space-y-6">
-              <a href="mailto:Ayushguleria73@gmail.com" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
-                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white transition-colors">
-                  <FontAwesomeIcon icon={faEnvelope} />
+              <div
+                onClick={() => copyToClipboard('Ayushguleria73@gmail.com')}
+                className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group cursor-pointer"
+              >
+                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white transition-colors relative">
+                  <FontAwesomeIcon icon={faEnvelope} className="group-hover:opacity-0 transition-opacity" />
+                  <FontAwesomeIcon icon={faCopy} className="absolute opacity-0 group-hover:opacity-100 transition-opacity text-sm" />
                 </div>
-                <span className="text-lg font-light">Ayushguleria73@gmail.com</span>
-              </a>
+                <div className="flex flex-col">
+                  <span className="text-lg font-light leading-none">Ayushguleria73@gmail.com</span>
+                  <span className="text-[10px] uppercase tracking-widest text-white/30 group-hover:text-white/60 transition-colors mt-1">Click to copy</span>
+                </div>
+              </div>
               <div className="flex items-center gap-4 text-white/80">
                 <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center">
                   <FontAwesomeIcon icon={faMapMarkerAlt} />
@@ -155,10 +172,10 @@ const Contact = () => {
                 />
               </div>
 
-              <button
+              <RippleButton
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full bg-white text-black py-4 rounded-full font-bold tracking-wide hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
+                className="w-full bg-white text-black py-4 rounded-full font-bold tracking-wide hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 disabled:opacity-70 shadow-xl"
               >
                 {status === 'submitting' ? (
                   <span>SENDING...</span>
@@ -171,7 +188,7 @@ const Contact = () => {
                     SEND MESSAGE <FontAwesomeIcon icon={faPaperPlane} />
                   </>
                 )}
-              </button>
+              </RippleButton>
 
               {/* Error Message */}
               <AnimatePresence>
@@ -190,6 +207,7 @@ const Contact = () => {
           </motion.div>
         </div>
       </div>
+      <Toast message="Email copied to clipboard!" isVisible={showToast} />
     </section>
   );
 };

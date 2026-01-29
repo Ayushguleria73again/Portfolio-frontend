@@ -2,13 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { generateResume } from '../utils/generateResume';
+import { generateResume } from '../../utils/generateResume';
+import Toast from '../common/Toast';
+import Magnetic from '../common/Magnetic';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null); // For mobile
   const [hoveredDropdown, setHoveredDropdown] = useState(null); // For desktop
+  const [showToast, setShowToast] = useState(false);
+
+  const handleDownloadResume = () => {
+    generateResume();
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,7 +66,7 @@ const Navbar = () => {
         { name: 'Tech Stack', href: '#tech-stack' }
       ]
     },
-    { name: 'Resume', type: 'action', action: generateResume }
+    { name: 'Resume', type: 'action', action: handleDownloadResume }
   ];
 
   const menuVariants = {
@@ -107,13 +116,16 @@ const Navbar = () => {
       >
         <div className="flex justify-between items-center relative z-20">
           {/* Logo */}
-          <motion.div
-            className="text-xl font-bold tracking-tighter"
-            whileHover={{ scale: 1.05 }}
-          >
-            <span className="text-white">AG</span>
-            <span className="text-white/50">.</span>
-          </motion.div>
+          <Magnetic strength={0.2}>
+            <motion.div
+              className="text-xl font-bold tracking-tighter cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <span className="text-white">AG</span>
+              <span className="text-white/50">.</span>
+            </motion.div>
+          </Magnetic>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-md">
@@ -178,14 +190,16 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:block">
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-gray-200 transition-colors"
-            >
-              Let's Talk
-            </motion.a>
+            <Magnetic strength={0.3}>
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-gray-200 transition-colors inline-block"
+              >
+                Let's Talk
+              </motion.a>
+            </Magnetic>
           </div>
 
           {/* Mobile Menu Button */}
@@ -193,13 +207,16 @@ const Navbar = () => {
             className="md:hidden flex items-center"
             whileTap={{ scale: 0.9 }}
           >
-            <button
-              onClick={toggleMobileMenu}
-              className="text-white p-2 focus:outline-none"
-            >
-              <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} className="w-5 h-5" />
-            </button>
+            <Magnetic strength={0.5}>
+              <button
+                onClick={toggleMobileMenu}
+                className="text-white p-2 focus:outline-none"
+              >
+                <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} className="w-5 h-5" />
+              </button>
+            </Magnetic>
           </motion.div>
+
         </div>
 
         {/* Mobile Menu Overlay */}
@@ -281,6 +298,7 @@ const Navbar = () => {
           )}
         </AnimatePresence>
       </motion.nav>
+      <Toast message="Resume generated successfully!" isVisible={showToast} />
     </div>
   );
 };

@@ -1,12 +1,55 @@
-# React + Vite
+# Portfolio Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the premium frontend repository for the portfolio project, built with a focus on immersive UX and smooth interactivity.
 
-Currently, two official plugins are available:
+## 🛠️ Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **Framework**: [React 19](https://react.dev/)
+*   **Animations**: [Framer Motion](https://www.framer.com/motion/)
+*   **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+*   **Build Tool**: [Vite](https://vitejs.dev/)
+*   **Icons**: [Lucide React](https://lucide.dev/)
 
-## Expanding the ESLint configuration
+## ✨ Key UI/UX Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Editorial Project Grid
+A sophisticated, vertical scrolling showcase for projects.
+- **Parallax Imagery**: Smooth scaling and displacement effects on images.
+- **Visual Contrast**: Integration of grayscale-to-color transitions and wide-tracking typography.
+- **Dynamic Content**: Alternating layouts (Image-Right/Info-Left) for varied visual rhythm.
+
+### 2. Immersive Interactivity
+- **Magnetic Components**: Interactive elements (Logo, buttons, links) that subtly track the cursor for a tactile feel.
+- **3D Tilt Cards**: Sophisticated spring-loaded 3D rotation on cards in the About section.
+- **Custom Cursor**: A minimalist, scaling cursor that adapts to interactive regions.
+- **Grain Texture Overlay**: A global animated noise texture for a vintage yet modern digital aesthetic.
+
+## 🚀 Getting Started
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### Production Build
+
+```bash
+# Create production build
+npm run build
+
+# Preview build
+npm run preview
+```
+
+## 📂 Directory Structure
+
+*   `src/components/common`: Reusable UI components (Magnetic, Tilt, RippleButton).
+*   `src/components/layout`: Global layout components (Navbar, Footer).
+*   `src/components/sections`: Page-specific sections (Hero, About, Projects, Contact).
+*   `src/pages`: Top-level page components.
+*   `src/index.css`: Global styles and Tailwind configuration.

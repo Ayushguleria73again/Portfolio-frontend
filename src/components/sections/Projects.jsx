@@ -10,9 +10,7 @@ import travel from '../../assets/travel.png'
 import bunai from '../../assets/bunai.png'
 import threadTimberIcon from '../../assets/threadsAndTimber.png'
 
-const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
-
+const Projects = ({ selectedProject, setSelectedProject }) => {
   const projectData = [
     {
       image: project1,
@@ -101,7 +99,7 @@ const Projects = () => {
         project={selectedProject}
         isOpen={!!selectedProject}
         onClose={() => {
-          playSound('click');
+          playSound('modalClose');
           setSelectedProject(null);
         }}
       />

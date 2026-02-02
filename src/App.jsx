@@ -11,6 +11,7 @@ import SoundManager from './components/common/SoundManager';
 
 function App() {
   const [weatherType, setWeatherType] = useState('none');
+  const [selectedProject, setSelectedProject] = useState(null);
   const [isMuted, setIsMuted] = useState(() => {
     return localStorage.getItem('isMuted') === 'true';
   });
@@ -93,10 +94,17 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
-      <SoundManager weatherType={weatherType} isMuted={isMuted} />
+      <SoundManager weatherType={weatherType} isMuted={isMuted} isPaused={!!selectedProject} />
 
       <Routes>
-        <Route path="/" element={<Home weatherType={weatherType} setWeatherType={setWeatherType} isMuted={isMuted} setIsMuted={setIsMuted} />} />
+        <Route path="/" element={<Home
+          weatherType={weatherType}
+          setWeatherType={setWeatherType}
+          isMuted={isMuted}
+          setIsMuted={setIsMuted}
+          selectedProject={selectedProject}
+          setSelectedProject={setSelectedProject}
+        />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

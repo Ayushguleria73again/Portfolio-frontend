@@ -6,8 +6,15 @@
 
 
 
-* {
+:root {
+    --primary-accent: #3b82f6;
+    --accent-glow: rgba(59, 130, 246, 0.4);
+    --accent-glow-light: rgba(59, 130, 246, 0.1);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+    font-family: inherit;
 }
 
 /* Cursor Styles */

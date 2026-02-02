@@ -76,7 +76,10 @@ const Skills = () => {
               className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-colors duration-300"
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className={`w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center ${category.color}`}>
+                <div
+                  className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center transition-colors duration-500"
+                  style={{ color: 'var(--primary-accent)' }}
+                >
                   <FontAwesomeIcon icon={category.icon} className="text-2xl" />
                 </div>
                 <h3 className="text-2xl font-light text-white">{category.title}</h3>
@@ -88,8 +91,14 @@ const Skills = () => {
                     key={sIdx}
                     className="group relative"
                   >
-                    <div className="absolute inset-0 bg-white/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative px-4 py-2 bg-[#0a0a0a] border border-white/10 rounded-full flex items-center gap-2 hover:border-white/30 transition-colors">
+                    <div
+                      className="absolute inset-0 rounded-full blur-md opacity-0 group-hover:opacity-40 transition-opacity"
+                      style={{ backgroundColor: 'var(--primary-accent)' }}
+                    />
+                    <div
+                      className="relative px-4 py-2 bg-[#0a0a0a] border rounded-full flex items-center gap-2 hover:border-[var(--primary-accent)] transition-colors duration-500"
+                      style={{ borderColor: 'rgba(255,255,255,0.1)' }}
+                    >
                       <FontAwesomeIcon icon={skill.icon} style={{ color: skill.color }} className="text-sm" />
                       <span className="text-sm text-gray-300">{skill.name}</span>
                     </div>

@@ -6,7 +6,7 @@ import { generateResume } from '../../utils/generateResume';
 import Toast from '../common/Toast';
 import Magnetic from '../common/Magnetic';
 
-const Navbar = ({ isSnowing, setIsSnowing }) => {
+const Navbar = ({ weatherType, setWeatherType }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -123,7 +123,7 @@ const Navbar = ({ isSnowing, setIsSnowing }) => {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               <span className="text-white">AG</span>
-              <span className="text-white/50">.</span>
+              <span style={{ color: 'var(--primary-accent)' }}>.</span>
             </motion.div>
           </Magnetic>
 
@@ -195,7 +195,8 @@ const Navbar = ({ isSnowing, setIsSnowing }) => {
                 href="#contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-gray-200 transition-colors inline-block"
+                className="px-5 py-2 text-white hover:text-black text-sm font-bold rounded-full transition-all duration-500 inline-block"
+                style={{ backgroundColor: 'var(--primary-accent)' }}
               >
                 Let's Talk
               </motion.a>

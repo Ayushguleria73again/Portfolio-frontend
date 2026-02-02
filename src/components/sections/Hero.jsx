@@ -1,13 +1,48 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState , useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Snowfall from 'react-snowfall';
 import RippleButton from '../common/RippleButton';
 import Magnetic from '../common/Magnetic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSnowflake } from '@fortawesome/free-solid-svg-icons';
+import { faSnowflake, faLeaf, faSeedling, faSun } from '@fortawesome/free-solid-svg-icons';
 
-const Hero = ({ isSnowing, setIsSnowing }) => {
+const Hero = ({ weatherType, setWeatherType }) => {
   const targetRef = useRef(null);
+
+  // Set initial season only once
+  useEffect(() => {
+    if (weatherType === 'none') {
+      const month = new Date().getMonth();
+      if (month >= 2 && month <= 4) setWeatherType('petals'); // Spring
+      else if (month >= 8 && month <= 10) setWeatherType('leaves'); // Autumn
+      else if (month >= 11 || month <= 1) setWeatherType('snow'); // Winter
+    }
+  }, []);
+
+  const cycleWeather = () => {
+    const effects = ['none', 'snow', 'petals', 'leaves'];
+    const nextIndex = (effects.indexOf(weatherType) + 1) % effects.length;
+    setWeatherType(effects[nextIndex]);
+  };
+
+  const getWeatherIcon = () => {
+    switch (weatherType) {
+      case 'snow': return faSnowflake;
+      case 'petals': return faSeedling;
+      case 'leaves': return faLeaf;
+      default: return faSun;
+    }
+  };
+
+  const getWeatherLabel = () => {
+    switch (weatherType) {
+      case 'snow': return 'Winter Snow';
+      case 'petals': return 'Spring Petals';
+      case 'leaves': return 'Autumn Leaves';
+      default: return 'Clear Sky';
+    }
+  };
+
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end start"]
@@ -179,28 +214,32 @@ const Hero = ({ isSnowing, setIsSnowing }) => {
           </motion.div>
         </motion.div>
 
-        {/* Snowfall Toggle */}
+        {/* Seasonal Effect Toggle */}
         <motion.div
           variants={buttonVariants}
           className="mt-12 flex justify-center"
         >
           <button
-            onClick={() => setIsSnowing(!isSnowing)}
+            onClick={cycleWeather}
             className={`
               group relative flex items-center gap-3 px-6 py-2.5 rounded-full border transition-all duration-500
-              ${isSnowing
-                ? 'bg-blue-500/10 border-blue-400/50 text-blue-400 shadow-[0_0_20px_rgba(96,165,250,0.2)]'
+              ${weatherType !== 'none'
+                ? 'bg-primary-accent/10 border-primary-accent/50 text-white shadow-[0_0_20px_var(--accent-glow-light)]'
                 : 'bg-white/5 border-white/10 text-white/40 hover:border-white/20 hover:text-white/60'}
             `}
+            style={{
+              borderColor: weatherType !== 'none' ? 'var(--primary-accent)' : undefined,
+              color: weatherType !== 'none' ? 'white' : undefined
+            }}
           >
             <motion.div
-              animate={isSnowing ? { rotate: 180, scale: 1.2 } : { rotate: 0, scale: 1 }}
-              transition={{ type: "spring", stiffness: 200 }}
+              animate={weatherType !== 'none' ? { rotate: 360 } : { rotate: 0 }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             >
-              <FontAwesomeIcon icon={faSnowflake} className={isSnowing ? "animate-spin-slow" : ""} />
+              <FontAwesomeIcon icon={getWeatherIcon()} />
             </motion.div>
             <span className="text-xs uppercase tracking-[0.2em] font-medium">
-              {isSnowing ? 'Stop Snowing' : 'Let it Snow'}
+              {getWeatherLabel()}
             </span>
 
             {/* Hover Glow Effect */}

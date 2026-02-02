@@ -54,6 +54,7 @@ const Projects = () => {
       description: 'A sophisticated e-commerce solution featuring real-time inventory management, advanced analytics, and seamless payment integration.',
       tech: ['React', 'Node.js', 'MongoDB', 'Tailwind'],
       link: 'https://my-luxe-store.vercel.app/',
+      accentColor: '#3b82f6', // Azure Blue
     },
     {
       image: threadTimberIcon,
@@ -61,6 +62,7 @@ const Projects = () => {
       description: 'A premium e-commerce platform for handcrafted artisan apparel and sustainable fashion.',
       tech: ['Next.js', 'TypeScript', 'Express', 'MongoDB'],
       link: 'https://thread-and-timber-mror.vercel.app/',
+      accentColor: '#10b981', // Emerald Green
     },
     {
       image: bunai,
@@ -68,6 +70,7 @@ const Projects = () => {
       description: 'An e-commerce website for a Himalayan knitting brand, focusing on heritage and craftsmanship.',
       tech: ['React', 'Vite', 'Express', 'MongoDB'],
       link: 'https://bunai-from-hills.vercel.app/',
+      accentColor: '#f59e0b', // Amber
     },
     {
       image: taskmanager,
@@ -75,6 +78,7 @@ const Projects = () => {
       description: 'Collaborative workspace with real-time synchronization, advanced filtering, and drag-and-drop interface.',
       tech: ['React', 'Node.js', 'MongoDB', 'Framer'],
       link: 'https://task-manager-plum-zeta.vercel.app/',
+      accentColor: '#8b5cf6', // Soft Purple
     },
     {
       image: travel,
@@ -82,11 +86,18 @@ const Projects = () => {
       description: 'A dynamic travel booking platform with user reviews and smooth user experience.',
       tech: ['React', 'Framer Motion', 'Tailwind'],
       link: 'https://travels-one-eta.vercel.app/',
+      accentColor: '#f97316', // Bright Orange
     }
   ];
 
+  const updateTheme = (color) => {
+    document.documentElement.style.setProperty('--primary-accent', color);
+    document.documentElement.style.setProperty('--accent-glow', `${color}66`); // 40% opacity
+    document.documentElement.style.setProperty('--accent-glow-light', `${color}1a`); // 10% opacity
+  };
+
   return (
-    <section id="projects" className="py-32 animated-bg relative overflow-hidden">
+    <section id="projects" className="py-32 animated-bg relative overflow-hidden transition-colors duration-1000">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -99,14 +110,19 @@ const Projects = () => {
           <span className="text-white/30 font-mono text-sm tracking-[0.5em] uppercase block mb-4">Portfolio</span>
           <h2 className="text-6xl md:text-9xl font-black text-white tracking-tighter leading-none">
             SELECTED<br />
-            <span className="text-transparent stroke-text">WORKS</span>
+            <span className="text-transparent stroke-text" style={{ WebkitTextStrokeColor: 'var(--accent-glow)' }}>WORKS</span>
           </h2>
         </motion.div>
 
         {/* Editorial Grid */}
         <div className="flex flex-col gap-40 md:gap-64">
           {projectData.map((project, index) => (
-            <ProjectItem key={index} project={project} index={index} />
+            <ProjectItem
+              key={index}
+              project={project}
+              index={index}
+              onEnter={() => updateTheme(project.accentColor)}
+            />
           ))}
         </div>
       </div>
@@ -114,7 +130,7 @@ const Projects = () => {
   );
 };
 
-const ProjectItem = ({ project, index }) => {
+const ProjectItem = ({ project, index, onEnter }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -148,7 +164,8 @@ const ProjectItem = ({ project, index }) => {
       className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      onViewportEnter={() => onEnter()}
+      viewport={{ amount: 0.5 }}
       transition={{ duration: 0.8, delay: 0.2 }}
     >
       {/* Image Container with 3D Tilt Effect */}
@@ -196,7 +213,10 @@ const ProjectItem = ({ project, index }) => {
           </motion.span>
 
           {/* Glow Effect */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] pointer-events-none" />
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] pointer-events-none"
+            style={{ background: 'radial-gradient(circle at center, var(--accent-glow) 0%, transparent 70%)' }}
+          />
         </motion.div>
       </div>
 
@@ -231,7 +251,10 @@ const ProjectItem = ({ project, index }) => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-6 group"
             >
-              <span className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white transition-all duration-500">
+              <span
+                className="w-14 h-14 rounded-full border flex items-center justify-center group-hover:bg-[var(--primary-accent)] transition-all duration-500"
+                style={{ borderColor: 'var(--primary-accent)' }}
+              >
                 <span className="text-white group-hover:text-black text-xl transition-colors">↗</span>
               </span>
               <span className="text-sm font-bold tracking-widest uppercase text-white/80 group-hover:text-white transition-colors">

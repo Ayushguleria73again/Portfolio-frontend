@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
 // Central Sound Registry
 const SOUND_ASSETS = {
@@ -11,58 +11,85 @@ const SOUND_ASSETS = {
     ambientLeaves: 'https://www.videomaker.com/sites/videomaker.com/files/audioplay/Walking-On-Dry-Leaves-01.mp3',
 };
 
+// Internal throttling for UI sounds
+let lastHoverTime = 0;
+const UI_SOUND_THROTTLE = 100; // ms
+
 // Global sound manager instance for non-react usage if needed
 export const playSound = (soundName, volume = 0.2) => {
     const url = SOUND_ASSETS[soundName];
-    if (url && !window.isMuted) {
-        const audio = new Audio(url);
-        audio.volume = volume;
-        audio.play().catch(() => { }); // Catch browser auto-play block
+    if (!url || window.isMuted) return;
+
+    // Throttle hover sounds to prevent glitchy machine-gun noise
+    if (soundName === 'hover') {
+        const now = Date.now();
+        if (now - lastHoverTime < UI_SOUND_THROTTLE) return;
+        lastHoverTime = now;
     }
+
+    const audio = new Audio(url);
+    audio.volume = volume;
+    audio.play().catch(() => {
+        // Silently ignore auto-play restrictions or aborted loads
+    });
 };
 
 const SoundManager = ({ weatherType, isMuted }) => {
-    const [ambientAudio, setAmbientAudio] = useState(null);
+    const ambientRef = useRef(null);
+    const currentAmbientType = useRef(null);
 
+    // Sync mute state to global window for playSound access
     useEffect(() => {
         window.isMuted = isMuted;
     }, [isMuted]);
 
     const stopAmbient = useCallback(() => {
-        if (ambientAudio) {
-            ambientAudio.pause();
-            ambientAudio.currentTime = 0;
+        if (ambientRef.current) {
+            ambientRef.current.pause();
+            ambientRef.current.currentTime = 0;
+            ambientRef.current = null;
+            currentAmbientType.current = null;
         }
-    }, [ambientAudio]);
+    }, []);
 
     useEffect(() => {
-        if (isMuted) {
+        // If muted or weather is none, stop everything
+        if (isMuted || weatherType === 'none') {
             stopAmbient();
             return;
         }
 
-        let ambientName = null;
-        if (weatherType === 'snow') ambientName = 'ambientSnow';
-        else if (weatherType === 'petals') ambientName = 'ambientPetals';
-        else if (weatherType === 'leaves') ambientName = 'ambientLeaves';
+        // Determine target ambient sound
+        let targetAmbient = null;
+        if (weatherType === 'snow') targetAmbient = 'ambientSnow';
+        else if (weatherType === 'petals') targetAmbient = 'ambientPetals';
+        else if (weatherType === 'leaves') targetAmbient = 'ambientLeaves';
 
-        if (ambientName) {
-            stopAmbient();
-            const newAudio = new Audio(SOUND_ASSETS[ambientName]);
+        // If target changed, switch audio
+        if (targetAmbient && targetAmbient !== currentAmbientType.current) {
+            stopAmbient(); // Stop previous synchronously
+
+            const newAudio = new Audio(SOUND_ASSETS[targetAmbient]);
             newAudio.loop = true;
             newAudio.volume = 0.1;
+
+            ambientRef.current = newAudio;
+            currentAmbientType.current = targetAmbient;
+
             newAudio.play().catch(() => {
-                console.warn('Ambient audio play blocked by browser. Interact with page to enable.');
+                console.warn('Ambient audio play blocked. Interaction required.');
             });
-            setAmbientAudio(newAudio);
-        } else {
+        } else if (!targetAmbient) {
             stopAmbient();
         }
 
-        return () => stopAmbient();
+        return () => {
+            // Small delay on unmount cleanup to prevent clicks, but usually immediate is fine
+            stopAmbient();
+        };
     }, [weatherType, isMuted, stopAmbient]);
 
-    return null; // Side-effect component
+    return null; // Purely functional component
 };
 
 export default SoundManager;

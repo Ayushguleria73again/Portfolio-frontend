@@ -60,7 +60,7 @@ const Projects = ({ selectedProject, setSelectedProject }) => {
   };
 
   return (
-    <section id="projects" className="py-32 animated-bg relative overflow-hidden transition-colors duration-1000">
+    <section id="projects" className="py-32 relative overflow-hidden transition-colors duration-1000">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -168,6 +168,7 @@ const ProjectItem = ({ project, index, onEnter, onExplore }) => {
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               onClick={onExplore}
+              layoutId={`project-image-${project.title}`}
             >
               <img
                 src={project.image}

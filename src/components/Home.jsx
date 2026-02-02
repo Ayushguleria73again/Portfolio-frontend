@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './layout/Navbar';
+import Dock from './layout/Dock';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Projects from './sections/Projects';
@@ -12,17 +12,20 @@ import Chatbot from './common/Chatbot';
 
 const Home = ({ weatherType, setWeatherType, selectedProject, setSelectedProject }) => {
     return (
-        <div className="bg-black text-white overflow-x-hidden">
-            <Navbar weatherType={weatherType} setWeatherType={setWeatherType} />
-            <Hero weatherType={weatherType} setWeatherType={setWeatherType} />
-            <About />
-            <Experience />
-            <Projects selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
-            <TechStack />
-            <Skills />
-            <Contact />
-            <Footer />
-            <Chatbot />
+        <div className="animated-bg text-white overflow-x-hidden relative">
+            {/* Content Wrapper */}
+            <div className="relative z-10">
+                <Dock />
+                <Hero weatherType={weatherType} setWeatherType={setWeatherType} />
+                <About />
+                <Experience />
+                <Projects selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
+                <TechStack />
+                <Skills />
+                <Contact />
+                <Footer />
+                <Chatbot />
+            </div>
         </div>
     );
 };

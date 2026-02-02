@@ -6,7 +6,7 @@ import Tilt from "../common/Tilt";
 
 const About = () => {
   return (
-    <section id="about" className="py-20 relative overflow-hidden animated-bg">
+    <section id="about" className="py-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Heading */}
         <motion.div

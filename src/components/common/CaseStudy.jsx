@@ -58,7 +58,10 @@ const CaseStudy = ({ project, isOpen, onClose }) => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Hero Section */}
-                        <div className="relative h-[40vh] md:h-[60vh] w-full overflow-hidden">
+                        <motion.div
+                            className="relative h-[40vh] md:h-[60vh] w-full overflow-hidden"
+                            layoutId={`project-image-${project.title}`}
+                        >
                             <img
                                 src={project.image}
                                 alt={project.title}
@@ -83,7 +86,7 @@ const CaseStudy = ({ project, isOpen, onClose }) => {
                                     {project.title}
                                 </motion.h2>
                             </div>
-                        </div>
+                        </motion.div>
 
                         {/* Editorial Content */}
                         <div className="p-8 md:p-20 grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24">

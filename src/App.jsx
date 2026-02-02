@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Snowfall from 'react-snowfall';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoadingScreen from './components/common/LoadingScreen';
 import CustomCursor from './components/common/CustomCursor';
 import Home from './components/Home';
 import NotFound from './pages/NotFound';
@@ -61,7 +60,6 @@ function App() {
 
   return (
     <Router>
-      <LoadingScreen />
       <CustomCursor />
       <AnimatePresence mode="wait">
         {weatherType !== 'none' && weatherConfig && (

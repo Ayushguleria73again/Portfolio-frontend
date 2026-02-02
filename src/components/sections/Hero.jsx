@@ -1,23 +1,70 @@
-import React, { useRef, useState , useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import Snowfall from 'react-snowfall';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import RippleButton from '../common/RippleButton';
 import Magnetic from '../common/Magnetic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSnowflake, faLeaf, faSeedling, faSun } from '@fortawesome/free-solid-svg-icons';
 
+// --- Decoder Text Component ---
+const DecoderText = ({ text, className }) => {
+  const [decodedText, setDecodedText] = useState('');
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@#$%&';
+
+  useEffect(() => {
+    let iteration = 0;
+    let interval = null;
+
+    const startDecoding = () => {
+      interval = setInterval(() => {
+        setDecodedText(
+          text.split('').map((char, index) => {
+            if (index < iteration) return text[index];
+            return chars[Math.floor(Math.random() * chars.length)];
+          }).join('')
+        );
+
+        if (iteration >= text.length) {
+          clearInterval(interval);
+        }
+        iteration += 1 / 3;
+      }, 50);
+    };
+
+    // Delay start slightly for effect
+    const timeout = setTimeout(startDecoding, 500);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [text]);
+
+  return <span className={className}>{decodedText}</span>;
+}
+
 const Hero = ({ weatherType, setWeatherType }) => {
   const targetRef = useRef(null);
 
-  // Set initial season only once
-  useEffect(() => {
-    if (weatherType === 'none') {
-      const month = new Date().getMonth();
-      if (month >= 2 && month <= 4) setWeatherType('petals'); // Spring
-      else if (month >= 8 && month <= 10) setWeatherType('leaves'); // Autumn
-      else if (month >= 11 || month <= 1) setWeatherType('snow'); // Winter
-    }
-  }, []);
+  // Scroll Transforms (The "Explode" Effect)
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end start"]
+  });
+
+  const splitLeftX = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
+  const splitRightX = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const splitOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const splitBlur = useTransform(scrollYProgress, [0, 0.5], ["0px", "10px"]);
+
+  // Background Parallax
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+
+  const weatherConfig = {
+    'snow': { icon: faSnowflake, label: 'Winter Snow' },
+    'petals': { icon: faSeedling, label: 'Spring Petals' },
+    'leaves': { icon: faLeaf, label: 'Autumn Leaves' },
+    'none': { icon: faSun, label: 'Clear Sky' }
+  };
 
   const cycleWeather = () => {
     const effects = ['none', 'snow', 'petals', 'leaves'];
@@ -25,208 +72,96 @@ const Hero = ({ weatherType, setWeatherType }) => {
     setWeatherType(effects[nextIndex]);
   };
 
-  const getWeatherIcon = () => {
-    switch (weatherType) {
-      case 'snow': return faSnowflake;
-      case 'petals': return faSeedling;
-      case 'leaves': return faLeaf;
-      default: return faSun;
-    }
-  };
-
-  const getWeatherLabel = () => {
-    switch (weatherType) {
-      case 'snow': return 'Winter Snow';
-      case 'petals': return 'Spring Petals';
-      case 'leaves': return 'Autumn Leaves';
-      default: return 'Clear Sky';
-    }
-  };
-
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start start", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const textVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const particleVariants = {
-    animate: (i) => ({
-      y: [0, -20, 0],
-      x: [0, 10, 0],
-      opacity: [0.2, 0.5, 0.2],
-      transition: {
-        duration: 4 + i,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    })
-  };
-
-  const buttonVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        delay: 1.2
-      }
-    }
-  };
-
-  const morphingVariants = {
-    animate: {
-      rotate: [0, 180, 360],
-      scale: [1, 1.2, 1],
-      borderRadius: ["20%", "50%", "20%"],
-      transition: {
-        duration: 8,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
   return (
     <section
       id="home"
       ref={targetRef}
-      className="min-h-screen animated-bg flex items-center justify-center relative overflow-hidden pt-32 md:pt-0 pb-[10px]"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-32 md:pt-0 pb-[10px] perspective-1000"
     >
-      <div />{/* Removed local Snowfall - moved to App.jsx */}
-
-      {/* Parallax background elements */}
+      {/* --- The Fluid Universe Background --- */}
       <motion.div
-        style={{ y, opacity, scale }}
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 z-0 opacity-40 pointer-events-none"
+        style={{ y: bgY }}
       >
-        <div className="absolute inset-0">
-          {[...Array(4)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-white"
-              style={{
-                width: `${4 + i * 2}px`,
-                height: `${4 + i * 2}px`,
-                top: `${[15, 35, 60, 85][i]}%`,
-                left: `${[15, 75, 20, 80][i]}%`,
-                opacity: 0.2
-              }}
-              variants={particleVariants}
-              animate="animate"
-              custom={i}
-            />
-          ))}
-        </div>
-
-        {/* Large Decorative Circles */}
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+        {/* Global Mouse Glow handled in Home.jsx */}
       </motion.div>
 
-      <motion.div
-        className="text-center px-6 z-10 relative"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.div className="mb-6" variants={textVariants}>
-          <Magnetic strength={0.3}>
-            <motion.h1
-              className="text-6xl md:text-9xl font-thin tracking-tighter mb-2"
-              variants={textVariants}
-            >
-              AYUSH
-            </motion.h1>
-            <motion.h1
-              className="text-6xl md:text-9xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500"
-              variants={textVariants}
-            >
-              GULERIA
-            </motion.h1>
+      <div className="text-center px-6 z-10 relative">
+
+        {/* --- "Scroll Explode" Title --- */}
+        <div className="relative mb-6 flex flex-col md:flex-row justify-center items-center gap-2 md:gap-8 perspective-1000">
+          <Magnetic strength={0.2}>
+            <motion.div style={{ x: splitLeftX, opacity: splitOpacity, filter: `blur(${splitBlur})` }}>
+              <h1 className="text-6xl md:text-9xl font-thin tracking-tighter mb-2 md:mb-0">
+                <DecoderText text="AYUSH" />
+              </h1>
+            </motion.div>
           </Magnetic>
-        </motion.div>
+
+          <Magnetic strength={0.2}>
+            <motion.div style={{ x: splitRightX, opacity: splitOpacity, filter: `blur(${splitBlur})` }}>
+              <h1 className="text-6xl md:text-9xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500">
+                <DecoderText text="GULERIA" />
+              </h1>
+            </motion.div>
+          </Magnetic>
+        </div>
 
         <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.8 }}
           className="text-xl md:text-3xl font-light mb-10 mx-auto tracking-widest uppercase text-gray-400"
-          variants={textVariants}
         >
           Full Stack Software Engineer
         </motion.div>
 
         <motion.p
-          className="text-base md:text-lg font-light mb-14 opacity-60 max-w-2xl mx-auto leading-relaxed"
-          variants={textVariants}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.6 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+          className="text-base md:text-lg font-light mb-14 max-w-2xl mx-auto leading-relaxed"
         >
           Crafting digital experiences that blend innovation with elegance.
           Where code meets creativity, and ideas transform into reality.
         </motion.p>
 
         <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.8, duration: 0.8 }}
           className="flex flex-col sm:flex-row gap-8 justify-center items-center"
-          variants={containerVariants}
         >
-          <motion.div variants={buttonVariants}>
-            <RippleButton
-              className="px-10 py-4 bg-white text-black rounded-full font-medium tracking-wide shadow-xl active:scale-95 transition-transform"
-              onClick={() => {
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              EXPLORE WORK
-            </RippleButton>
-          </motion.div>
+          <RippleButton
+            className="px-10 py-4 bg-white text-black rounded-full font-medium tracking-wide shadow-xl active:scale-95 transition-transform"
+            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            EXPLORE WORK
+          </RippleButton>
 
-          <motion.div variants={buttonVariants}>
-            <RippleButton
-              className="px-10 py-4 text-white border border-white/20 rounded-full font-medium tracking-wide hover:border-white/50 bg-white/5 backdrop-blur-sm active:scale-95 transition-all"
-              onClick={() => {
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              GET IN TOUCH
-            </RippleButton>
-          </motion.div>
+          <RippleButton
+            className="px-10 py-4 text-white border border-white/20 rounded-full font-medium tracking-wide hover:border-white/50 bg-white/5 backdrop-blur-sm active:scale-95 transition-all"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            GET IN TOUCH
+          </RippleButton>
         </motion.div>
 
-        {/* Seasonal Effect Toggle */}
+        {/* Seasonal Toggle */}
         <motion.div
-          variants={buttonVariants}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.5 }}
           className="mt-12 flex justify-center"
         >
           <button
             onClick={cycleWeather}
             className={`
-              group relative flex items-center gap-3 px-6 py-2.5 rounded-full border transition-all duration-500
-              ${weatherType !== 'none'
+                            group relative flex items-center gap-3 px-6 py-2.5 rounded-full border transition-all duration-500
+                            ${weatherType !== 'none'
                 ? 'bg-primary-accent/10 border-primary-accent/50 text-white shadow-[0_0_20px_var(--accent-glow-light)]'
                 : 'bg-white/5 border-white/10 text-white/40 hover:border-white/20 hover:text-white/60'}
-            `}
+                        `}
             style={{
               borderColor: weatherType !== 'none' ? 'var(--primary-accent)' : undefined,
               color: weatherType !== 'none' ? 'white' : undefined
@@ -236,28 +171,20 @@ const Hero = ({ weatherType, setWeatherType }) => {
               animate={weatherType !== 'none' ? { rotate: 360 } : { rotate: 0 }}
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             >
-              <FontAwesomeIcon icon={getWeatherIcon()} />
+              <FontAwesomeIcon icon={weatherConfig[weatherType].icon} />
             </motion.div>
             <span className="text-xs uppercase tracking-[0.2em] font-medium">
-              {getWeatherLabel()}
+              {weatherConfig[weatherType].label}
             </span>
-
-            {/* Hover Glow Effect */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/0 via-blue-400/5 to-blue-400/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
           </button>
         </motion.div>
+      </div>
 
-      </motion.div>
-
-      {/* Morphing shape with motion */}
-      <motion.div
-        className="absolute bottom-10 right-10 w-32 h-32 bg-white opacity-5"
-        variants={morphingVariants}
-        animate="animate"
-      />
+      {/* Decoration */}
+      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
     </section>
   );
 };
 
 export default Hero;
-

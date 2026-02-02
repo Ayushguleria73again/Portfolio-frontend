@@ -19,6 +19,7 @@
     "axios": "^1.11.0",
     "framer-motion": "^12.23.12",
     "jspdf": "^4.0.0",
+    "matter-js": "^0.20.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.13.0",

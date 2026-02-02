@@ -10,20 +10,8 @@ import NotFound from './pages/NotFound';
 function App() {
   const [isSnowing, setIsSnowing] = useState(false);
   useEffect(() => {
-    // Navigation visibility on scroll
-    let lastScrollTop = 0;
-    const nav = document.querySelector('.nav-slide');
-
     const handleScroll = () => {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (nav) { // Check if nav exists before manipulating
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-          nav.classList.remove('visible');
-        } else {
-          nav.classList.add('visible');
-        }
-      }
-      lastScrollTop = scrollTop;
+      // Logic removed - replaced by smart navbar in Navbar.jsx
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -64,11 +52,6 @@ function App() {
     document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up, .fade-in-scale').forEach(el => {
       observer.observe(el);
     });
-
-    // Initialize nav as visible and add visible class to first elements immediately
-    if (nav) {
-      nav.classList.add('visible');
-    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);

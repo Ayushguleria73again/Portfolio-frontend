@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import Magnetic from '../common/Magnetic'
 
 import project1 from '../../assets/project1.png'
@@ -115,6 +115,34 @@ const Projects = () => {
 };
 
 const ProjectItem = ({ project, index }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
     <motion.div
       className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}
@@ -123,24 +151,53 @@ const ProjectItem = ({ project, index }) => {
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, delay: 0.2 }}
     >
-      {/* Image Container with Parallax Effect */}
-      <div className="w-full md:w-[60%] aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-[2rem] bg-white/5 border border-white/10 group relative">
+      {/* Image Container with 3D Tilt Effect */}
+      <div
+        className="w-full md:w-[60%] aspect-[4/3] md:aspect-[16/10] perspective-[1000px] group relative"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
         <motion.div
-          className="w-full h-full"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            rotateX,
+            rotateY,
+            transformStyle: "preserve-3d",
+          }}
+          className="w-full h-full relative"
         >
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700 grayscale-[50%] group-hover:grayscale-0"
-          />
-        </motion.div>
+          <div
+            style={{
+              transform: "translateZ(50px)",
+              transformStyle: "preserve-3d",
+            }}
+            className="w-full h-full overflow-hidden rounded-[2rem] bg-white/5 border border-white/10"
+          >
+            <motion.div
+              className="w-full h-full"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700 grayscale-[50%] group-hover:grayscale-0"
+              />
+            </motion.div>
+          </div>
 
-        {/* Overlay Number */}
-        <span className="absolute top-8 right-8 text-6xl md:text-8xl font-black text-white/5 pointer-events-none tracking-tighter italic">
-          0{index + 1}
-        </span>
+          {/* Floating Project Number */}
+          <motion.span
+            style={{
+              transform: "translateZ(80px)",
+            }}
+            className="absolute -top-12 -right-12 md:-top-16 md:-right-16 text-8xl md:text-[12rem] font-black text-white/5 pointer-events-none tracking-tighter italic z-10"
+          >
+            0{index + 1}
+          </motion.span>
+
+          {/* Glow Effect */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] pointer-events-none" />
+        </motion.div>
       </div>
 
       {/* Info Container */}

@@ -6,11 +6,11 @@ import { generateResume } from '../../utils/generateResume';
 import Toast from '../common/Toast';
 import Magnetic from '../common/Magnetic';
 
-const Navbar = () => {
+const Navbar = ({ isSnowing, setIsSnowing }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null); // For mobile
-  const [hoveredDropdown, setHoveredDropdown] = useState(null); // For desktop
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [hoveredDropdown, setHoveredDropdown] = useState(null);
   const [showToast, setShowToast] = useState(false);
 
   const handleDownloadResume = () => {
@@ -216,7 +216,6 @@ const Navbar = () => {
               </button>
             </Magnetic>
           </motion.div>
-
         </div>
 
         {/* Mobile Menu Overlay */}

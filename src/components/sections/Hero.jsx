@@ -81,7 +81,7 @@ const Hero = ({ isSnowing, setIsSnowing }) => {
     <section
       id="home"
       ref={targetRef}
-      className="min-h-screen animated-bg flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen animated-bg flex items-center justify-center relative overflow-hidden pt-32 md:pt-0 pb-[10px]"
     >
       <div />{/* Removed local Snowfall - moved to App.jsx */}
 

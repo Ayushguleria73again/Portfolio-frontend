@@ -8,11 +8,12 @@ import Experience from './sections/Experience';
 import Skills from './sections/Skills';
 import Contact from './sections/Contact';
 import Footer from './layout/Footer';
+import Chatbot from './common/Chatbot';
 
 const Home = ({ isSnowing, setIsSnowing }) => {
     return (
         <div className="bg-black text-white overflow-x-hidden">
-            <Navbar />
+            <Navbar isSnowing={isSnowing} setIsSnowing={setIsSnowing} />
             <Hero isSnowing={isSnowing} setIsSnowing={setIsSnowing} />
             <About />
             <Experience />
@@ -21,6 +22,7 @@ const Home = ({ isSnowing, setIsSnowing }) => {
             <Skills />
             <Contact />
             <Footer />
+            <Chatbot />
         </div>
     );
 };

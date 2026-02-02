@@ -10,10 +10,10 @@ import Contact from './sections/Contact';
 import Footer from './layout/Footer';
 import Chatbot from './common/Chatbot';
 
-const Home = ({ weatherType, setWeatherType }) => {
+const Home = ({ weatherType, setWeatherType, isMuted, setIsMuted }) => {
     return (
         <div className="bg-black text-white overflow-x-hidden">
-            <Navbar weatherType={weatherType} setWeatherType={setWeatherType} />
+            <Navbar weatherType={weatherType} setWeatherType={setWeatherType} isMuted={isMuted} setIsMuted={setIsMuted} />
             <Hero weatherType={weatherType} setWeatherType={setWeatherType} />
             <About />
             <Experience />

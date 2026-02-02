@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes, faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 import { generateResume } from '../../utils/generateResume';
 import Toast from '../common/Toast';
 import Magnetic from '../common/Magnetic';
+import { playSound } from '../common/SoundManager';
 
-const Navbar = ({ weatherType, setWeatherType }) => {
+const Navbar = ({ weatherType, setWeatherType, isMuted, setIsMuted }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -116,16 +117,34 @@ const Navbar = ({ weatherType, setWeatherType }) => {
       >
         <div className="flex justify-between items-center relative z-20">
           {/* Logo */}
-          <Magnetic strength={0.2}>
-            <motion.div
-              className="text-xl font-bold tracking-tighter cursor-pointer"
-              whileHover={{ scale: 1.05 }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              <span className="text-white">AG</span>
-              <span style={{ color: 'var(--primary-accent)' }}>.</span>
-            </motion.div>
-          </Magnetic>
+          <div className="flex items-center gap-6">
+            <Magnetic strength={0.2}>
+              <motion.div
+                className="text-xl font-bold tracking-tighter cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                onClick={() => {
+                  playSound('click');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                <span className="text-white">AG</span>
+                <span style={{ color: 'var(--primary-accent)' }}>.</span>
+              </motion.div>
+            </Magnetic>
+
+            {/* Mute Toggle */}
+            <Magnetic strength={0.4}>
+              <button
+                onClick={() => {
+                  playSound('click');
+                  setIsMuted(!isMuted);
+                }}
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white transition-all opacity-0 md:opacity-100"
+              >
+                <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeUp} className="text-sm" />
+              </button>
+            </Magnetic>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-md">

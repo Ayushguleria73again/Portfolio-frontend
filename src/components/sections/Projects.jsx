@@ -1,52 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import Magnetic from '../common/Magnetic'
+import CaseStudy from '../common/CaseStudy'
+import { playSound } from '../common/SoundManager'
 
 import project1 from '../../assets/project1.png'
 import taskmanager from '../../assets/taskmanager.png'
 import travel from '../../assets/travel.png'
-import cafe from '../../assets/cafe.png'
-import tools from '../../assets/tools.png'
 import bunai from '../../assets/bunai.png'
 import threadTimberIcon from '../../assets/threadsAndTimber.png'
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.25
-    }
-  }
-}
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 60
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.9,
-      ease: 'easeOut'
-    }
-  }
-}
-
-const textVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: 'easeOut'
-    }
-  }
-}
-
 const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+
   const projectData = [
     {
       image: project1,
@@ -122,15 +88,28 @@ const Projects = () => {
               project={project}
               index={index}
               onEnter={() => updateTheme(project.accentColor)}
+              onExplore={() => {
+                playSound('modalOpen');
+                setSelectedProject(project);
+              }}
             />
           ))}
         </div>
       </div>
+
+      <CaseStudy
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => {
+          playSound('click');
+          setSelectedProject(null);
+        }}
+      />
     </section>
   );
 };
 
-const ProjectItem = ({ project, index, onEnter }) => {
+const ProjectItem = ({ project, index, onEnter, onExplore }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -162,6 +141,7 @@ const ProjectItem = ({ project, index, onEnter }) => {
   return (
     <motion.div
       className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}
+      onMouseEnter={() => playSound('hover', 0.1)}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       onViewportEnter={() => onEnter()}
@@ -190,9 +170,10 @@ const ProjectItem = ({ project, index, onEnter }) => {
             className="w-full h-full overflow-hidden rounded-[2rem] bg-white/5 border border-white/10"
           >
             <motion.div
-              className="w-full h-full"
+              className="w-full h-full cursor-pointer"
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              onClick={onExplore}
             >
               <img
                 src={project.image}
@@ -245,10 +226,8 @@ const ProjectItem = ({ project, index, onEnter }) => {
           </p>
 
           <Magnetic strength={0.3}>
-            <motion.a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.button
+              onClick={onExplore}
               className="inline-flex items-center gap-6 group"
             >
               <span
@@ -260,7 +239,7 @@ const ProjectItem = ({ project, index, onEnter }) => {
               <span className="text-sm font-bold tracking-widest uppercase text-white/80 group-hover:text-white transition-colors">
                 Explore Project
               </span>
-            </motion.a>
+            </motion.button>
           </Magnetic>
         </motion.div>
       </div>

@@ -7,8 +7,17 @@ import CustomCursor from './components/common/CustomCursor';
 import Home from './components/Home';
 import NotFound from './pages/NotFound';
 
+import SoundManager from './components/common/SoundManager';
+
 function App() {
-  const [weatherType, setWeatherType] = useState('none'); // 'none', 'snow', 'petals', 'leaves'
+  const [weatherType, setWeatherType] = useState('none');
+  const [isMuted, setIsMuted] = useState(() => {
+    return localStorage.getItem('isMuted') === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('isMuted', isMuted);
+  }, [isMuted]); // 'none', 'snow', 'petals', 'leaves'
 
   // Petal SVG for Spring
   const petalSVG = `data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 0C10 0 10 10 0 10C0 10 10 17 10 20C10 20 10 10 20 10C20 10 10 3 10 0Z' fill='%23ffb7c5' opacity='0.8'/%3E%3C/svg%3E`;
@@ -48,9 +57,9 @@ function App() {
       case 'snow':
         return { color: 'white', snowflakeCount: 150 };
       case 'petals':
-        return { images: petalImg ? [petalImg] : undefined, snowflakeCount: 80, radius: [2, 10], speed: [1, 3] };
+        return { images: petalImg ? [petalImg] : undefined, snowflakeCount: 150, radius: [2, 10], speed: [1, 3] };
       case 'leaves':
-        return { images: leafImg ? [leafImg] : undefined, snowflakeCount: 60, radius: [5, 15], speed: [0.8, 2.5] };
+        return { images: leafImg ? [leafImg] : undefined, snowflakeCount: 150, radius: [5, 15], speed: [0.8, 2.5] };
       default:
         return null;
     }
@@ -84,8 +93,10 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <SoundManager weatherType={weatherType} isMuted={isMuted} />
+
       <Routes>
-        <Route path="/" element={<Home weatherType={weatherType} setWeatherType={setWeatherType} />} />
+        <Route path="/" element={<Home weatherType={weatherType} setWeatherType={setWeatherType} isMuted={isMuted} setIsMuted={setIsMuted} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

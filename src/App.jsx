@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Snowfall from 'react-snowfall';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoadingScreen from './components/common/LoadingScreen';
 import CustomCursor from './components/common/CustomCursor';
@@ -6,6 +8,7 @@ import Home from './components/Home';
 import NotFound from './pages/NotFound';
 
 function App() {
+  const [isSnowing, setIsSnowing] = useState(false);
   useEffect(() => {
     // Navigation visibility on scroll
     let lastScrollTop = 0;
@@ -78,8 +81,28 @@ function App() {
     <Router>
       <LoadingScreen />
       <CustomCursor />
+      <AnimatePresence>
+        {isSnowing && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3, ease: "easeInOut" }}
+            className="fixed inset-0 z-[9999] pointer-events-none"
+          >
+            <Snowfall
+              color="white"
+              snowflakeCount={200}
+              opacity={[0.1, 0.6]}
+              radius={[0.5, 3.0]}
+              speed={[0.5, 2.0]}
+              wind={[-0.5, 2.0]}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home isSnowing={isSnowing} setIsSnowing={setIsSnowing} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Snowfall from 'react-snowfall';
 import RippleButton from '../common/RippleButton';
 import Magnetic from '../common/Magnetic';
-const Hero = () => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSnowflake } from '@fortawesome/free-solid-svg-icons';
+
+const Hero = ({ isSnowing, setIsSnowing }) => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -80,7 +83,7 @@ const Hero = () => {
       ref={targetRef}
       className="min-h-screen animated-bg flex items-center justify-center relative overflow-hidden"
     >
-      <Snowfall color='white' />
+      <div />{/* Removed local Snowfall - moved to App.jsx */}
 
       {/* Parallax background elements */}
       <motion.div
@@ -174,6 +177,35 @@ const Hero = () => {
               GET IN TOUCH
             </RippleButton>
           </motion.div>
+        </motion.div>
+
+        {/* Snowfall Toggle */}
+        <motion.div
+          variants={buttonVariants}
+          className="mt-12 flex justify-center"
+        >
+          <button
+            onClick={() => setIsSnowing(!isSnowing)}
+            className={`
+              group relative flex items-center gap-3 px-6 py-2.5 rounded-full border transition-all duration-500
+              ${isSnowing
+                ? 'bg-blue-500/10 border-blue-400/50 text-blue-400 shadow-[0_0_20px_rgba(96,165,250,0.2)]'
+                : 'bg-white/5 border-white/10 text-white/40 hover:border-white/20 hover:text-white/60'}
+            `}
+          >
+            <motion.div
+              animate={isSnowing ? { rotate: 180, scale: 1.2 } : { rotate: 0, scale: 1 }}
+              transition={{ type: "spring", stiffness: 200 }}
+            >
+              <FontAwesomeIcon icon={faSnowflake} className={isSnowing ? "animate-spin-slow" : ""} />
+            </motion.div>
+            <span className="text-xs uppercase tracking-[0.2em] font-medium">
+              {isSnowing ? 'Stop Snowing' : 'Let it Snow'}
+            </span>
+
+            {/* Hover Glow Effect */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/0 via-blue-400/5 to-blue-400/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+          </button>
         </motion.div>
 
       </motion.div>

@@ -9,11 +9,11 @@ import Skills from './sections/Skills';
 import Contact from './sections/Contact';
 import Footer from './layout/Footer';
 
-const Home = () => {
+const Home = ({ isSnowing, setIsSnowing }) => {
     return (
         <div className="bg-black text-white overflow-x-hidden">
             <Navbar />
-            <Hero />
+            <Hero isSnowing={isSnowing} setIsSnowing={setIsSnowing} />
             <About />
             <Experience />
             <Projects />

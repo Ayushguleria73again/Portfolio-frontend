@@ -25,7 +25,7 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL;
+      const apiUrl = import.meta.env.VITE_API_URL.replace(/\/$/, '');
       const response = await fetch(`${apiUrl}/api/mail/send`, {
         method: 'POST',
         headers: {

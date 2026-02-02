@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import Magnetic from '../common/Magnetic'
 import CaseStudy from '../common/CaseStudy'
-import { playSound } from '../common/SoundManager'
 
 import project1 from '../../assets/project1.png'
 import taskmanager from '../../assets/taskmanager.png'
@@ -87,7 +86,6 @@ const Projects = ({ selectedProject, setSelectedProject }) => {
               index={index}
               onEnter={() => updateTheme(project.accentColor)}
               onExplore={() => {
-                playSound('modalOpen');
                 setSelectedProject(project);
               }}
             />
@@ -99,7 +97,6 @@ const Projects = ({ selectedProject, setSelectedProject }) => {
         project={selectedProject}
         isOpen={!!selectedProject}
         onClose={() => {
-          playSound('modalClose');
           setSelectedProject(null);
         }}
       />
@@ -139,7 +136,6 @@ const ProjectItem = ({ project, index, onEnter, onExplore }) => {
   return (
     <motion.div
       className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}
-      onMouseEnter={() => playSound('hover', 0.1)}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       onViewportEnter={() => onEnter()}

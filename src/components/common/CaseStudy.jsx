@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faExternalLinkAlt, faCode, faLightbulb, faRocket } from '@fortawesome/free-solid-svg-icons';
 import RippleButton from './RippleButton';
-import { playSound } from './SoundManager';
 
 const CaseStudy = ({ project, isOpen, onClose }) => {
     // Prevent body scroll when modal is open
@@ -141,7 +140,6 @@ const CaseStudy = ({ project, isOpen, onClose }) => {
                                     <RippleButton
                                         className="px-12 py-5 bg-[var(--primary-accent)] text-white rounded-full font-bold tracking-widest hover:scale-105 active:scale-95 transition-all shadow-2xl flex items-center gap-4"
                                         onClick={() => {
-                                            playSound('click');
                                             window.open(project.link, '_blank');
                                         }}
                                     >

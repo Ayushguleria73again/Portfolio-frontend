@@ -76,7 +76,7 @@ const Skills = () => {
         </div>
 
         {/* The 3D Canvas */}
-        <div className="relative w-full aspect-[16/9] md:aspect-[2/1] bg-white/5 rounded-[3rem] border border-white/10 backdrop-blur-sm overflow-hidden group perspective-1000">
+        <div className="relative w-full h-[500px] md:h-auto md:aspect-[2/1] bg-white/5 rounded-[2rem] md:rounded-[3rem] border border-white/10 backdrop-blur-sm overflow-hidden group perspective-1000">
 
           {/* SVG Layer for Connections */}
           <div className="absolute inset-0 z-0 opacity-30">
@@ -99,8 +99,8 @@ const Skills = () => {
           ))}
 
           {/* Interactive hint */}
-          <div className="absolute bottom-8 right-8 text-white/20 text-xs tracking-widest pointer-events-none">
-            MOVE CURSOR TO EXPLORE
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:right-8 text-white/20 text-[10px] tracking-[0.2em] uppercase pointer-events-none whitespace-nowrap">
+            Exploration Active
           </div>
         </div>
 
@@ -172,12 +172,12 @@ const SkillNode = ({ skill, mouseX, mouseY }) => {
     >
       <div className="relative flex flex-col items-center gap-3">
         <div
-          className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#0a0a0a] border border-white/20 flex items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.5)] group-hover/node:border-white transition-colors duration-300"
+          className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-[#0a0a0a] border border-white/20 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] group-hover/node:border-white transition-colors duration-300"
         >
-          <FontAwesomeIcon icon={skill.icon} className="text-xl md:text-3xl text-gray-300 group-hover/node:text-white transition-colors" style={{ color: skill.color }} />
+          <FontAwesomeIcon icon={skill.icon} className="text-lg md:text-3xl text-gray-300 group-hover/node:text-white transition-colors" style={{ color: skill.color }} />
         </div>
-        <div className="bg-black/80 px-3 py-1 rounded-full border border-white/10 opacity-0 group-hover/node:opacity-100 transition-opacity backdrop-blur-md whitespace-nowrap">
-          <span className="text-xs font-bold tracking-widest uppercase">{skill.name}</span>
+        <div className="bg-black/80 px-2 py-0.5 md:px-3 md:py-1 rounded-full border border-white/10 opacity-40 md:opacity-0 group-hover/node:opacity-100 transition-opacity backdrop-blur-md whitespace-nowrap">
+          <span className="text-[8px] md:text-xs font-bold tracking-[0.1em] md:tracking-widest uppercase">{skill.name}</span>
         </div>
       </div>
 

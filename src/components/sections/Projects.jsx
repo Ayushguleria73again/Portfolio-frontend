@@ -16,7 +16,7 @@ const Projects = ({ selectedProject, setSelectedProject }) => {
       title: "PUpapers",
       description: "A comprehensive educational platform designed for Panjab University (PU) CET preparation. Features a high-performance mock test interface, real-time analytics, and AI-powered study assistance (Gemini 1.5 Flash).",
       tech: ["Next.js", "TypeScript", "Node.js", "MongoDB", "Tailwind", "Framer Motion"],
-      link: "https://pupapers.com/",
+      link: "https://p-upapers-mcq-frontend.vercel.app/",
       accentColor: '#FF6B00'
     },
     {

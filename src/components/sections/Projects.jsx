@@ -3,8 +3,8 @@ import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import Magnetic from '../common/Magnetic'
 import CaseStudy from '../common/CaseStudy'
 
-import project1 from '../../assets/project1.png'
-import taskmanager from '../../assets/taskmanager.png'
+import smol from '../../assets/smol.png'
+import pupapers from '../../assets/puPapers.png'
 import travel from '../../assets/travel.png'
 import bunai from '../../assets/bunai.png'
 import threadTimberIcon from '../../assets/threadsAndTimber.png'
@@ -12,12 +12,12 @@ import threadTimberIcon from '../../assets/threadsAndTimber.png'
 const Projects = ({ selectedProject, setSelectedProject }) => {
   const projectData = [
     {
-      image: project1,
-      title: 'MY LUXE STORE',
-      description: 'A sophisticated e-commerce solution featuring real-time inventory management, advanced analytics, and seamless payment integration.',
-      tech: ['React', 'Node.js', 'MongoDB', 'Tailwind'],
-      link: 'https://my-luxe-store.vercel.app/',
-      accentColor: '#3b82f6', // Azure Blue
+      image: pupapers,
+      title: "PUpapers",
+      description: "A comprehensive educational platform designed for Panjab University (PU) CET preparation. Features a high-performance mock test interface, real-time analytics, and AI-powered study assistance (Gemini 1.5 Flash).",
+      tech: ["Next.js", "TypeScript", "Node.js", "MongoDB", "Tailwind", "Framer Motion"],
+      link: "https://pupapers.com/",
+      accentColor: '#FF6B00'
     },
     {
       image: threadTimberIcon,
@@ -36,12 +36,12 @@ const Projects = ({ selectedProject, setSelectedProject }) => {
       accentColor: '#f59e0b', // Amber
     },
     {
-      image: taskmanager,
-      title: 'TASK MANAGEMENT',
-      description: 'Collaborative workspace with real-time synchronization, advanced filtering, and drag-and-drop interface.',
-      tech: ['React', 'Node.js', 'MongoDB', 'Framer'],
-      link: 'https://task-manager-plum-zeta.vercel.app/',
-      accentColor: '#8b5cf6', // Soft Purple
+      image: smol,
+      title: 'SMOL ELITE',
+      description: 'The professional-grade link shortener with real-time audience intelligence, city-level tracking, and automated reporting.',
+      tech: ['Next.js', 'Node.js', 'MongoDB', 'Express', 'Framer Motion', 'Tailwind CSS'],
+      link: 'https://link-shortner-frontend-kappa.vercel.app/',
+      accentColor: '#6366f1', // High-Energy Indigo
     },
     {
       image: travel,

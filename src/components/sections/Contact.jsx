@@ -149,7 +149,7 @@ const Contact = () => {
                         onBlur={() => setFocusedField(null)}
                         required
                         className={inputClasses}
-                        placeholder={field === 'name' ? 'Jane Doe' : field === 'email' ? 'jane@example.com' : 'Project Inquiry'}
+                        placeholder={field === 'name' ? 'Ayush Guleria' : field === 'email' ? 'Ayush@example.com' : 'Project Inquiry'}
                       />
                       {/* Animated Bottom Border */}
                       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/10" />

@@ -51,7 +51,7 @@ const TechStack = () => {
           whileInView={{ opacity: 1, y: 0 }}
           className="text-4xl md:text-5xl font-mono tracking-tighter text-white mb-4"
         >
-          NEURAL <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">HIVE</span>
+          TECH <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">STACK</span>
         </motion.h2>
         <p className="text-white/40 font-mono text-xs uppercase tracking-widest">
           <FontAwesomeIcon icon={faNetworkWired} className="mr-2" />

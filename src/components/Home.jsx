@@ -1,3 +1,4 @@
+import React from 'react';
 import Navbar from './layout/Navbar';
 import Dock from './layout/Dock';
 import Hero from './sections/Hero';

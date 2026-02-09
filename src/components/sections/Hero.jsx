@@ -59,19 +59,6 @@ const Hero = ({ weatherType, setWeatherType }) => {
   // Background Parallax
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
-  const weatherConfig = {
-    'snow': { icon: faSnowflake, label: 'Winter Snow' },
-    'petals': { icon: faSeedling, label: 'Spring Petals' },
-    'leaves': { icon: faLeaf, label: 'Autumn Leaves' },
-    'none': { icon: faSun, label: 'Clear Sky' }
-  };
-
-  const cycleWeather = () => {
-    const effects = ['none', 'snow', 'petals', 'leaves'];
-    const nextIndex = (effects.indexOf(weatherType) + 1) % effects.length;
-    setWeatherType(effects[nextIndex]);
-  };
-
   return (
     <section
       id="home"
@@ -145,38 +132,6 @@ const Hero = ({ weatherType, setWeatherType }) => {
           >
             GET IN TOUCH
           </RippleButton>
-        </motion.div>
-
-        {/* Seasonal Toggle */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.5 }}
-          className="mt-12 flex justify-center"
-        >
-          <button
-            onClick={cycleWeather}
-            className={`
-                            group relative flex items-center gap-3 px-6 py-2.5 rounded-full border transition-all duration-500
-                            ${weatherType !== 'none'
-                ? 'bg-primary-accent/10 border-primary-accent/50 text-white shadow-[0_0_20px_var(--accent-glow-light)]'
-                : 'bg-white/5 border-white/10 text-white/40 hover:border-white/20 hover:text-white/60'}
-                        `}
-            style={{
-              borderColor: weatherType !== 'none' ? 'var(--primary-accent)' : undefined,
-              color: weatherType !== 'none' ? 'white' : undefined
-            }}
-          >
-            <motion.div
-              animate={weatherType !== 'none' ? { rotate: 360 } : { rotate: 0 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            >
-              <FontAwesomeIcon icon={weatherConfig[weatherType].icon} />
-            </motion.div>
-            <span className="text-xs uppercase tracking-[0.2em] font-medium">
-              {weatherConfig[weatherType].label}
-            </span>
-          </button>
         </motion.div>
       </div>
 

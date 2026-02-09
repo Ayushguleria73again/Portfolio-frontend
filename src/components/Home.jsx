@@ -11,9 +11,9 @@ import Contact from './sections/Contact';
 import Footer from './layout/Footer';
 import Chatbot from './common/Chatbot';
 
-const Home = ({ weatherType, setWeatherType, selectedProject, setSelectedProject }) => {
+const Home = ({ weatherType, setWeatherType, selectedProject, setSelectedProject, isMagic, setIsMagic }) => {
     return (
-        <div className="animated-bg text-white overflow-x-hidden relative">
+        <div className="text-white overflow-x-hidden relative">
             {/* Content Wrapper */}
             <div className="relative z-10">
                 <div className="md:hidden">
@@ -22,7 +22,12 @@ const Home = ({ weatherType, setWeatherType, selectedProject, setSelectedProject
                 <div className="hidden md:block">
                     <Dock />
                 </div>
-                <Hero weatherType={weatherType} setWeatherType={setWeatherType} />
+                <Hero
+                    weatherType={weatherType}
+                    setWeatherType={setWeatherType}
+                    isMagic={isMagic}
+                    setIsMagic={setIsMagic}
+                />
                 <About />
                 <Experience />
                 <Projects selectedProject={selectedProject} setSelectedProject={setSelectedProject} />

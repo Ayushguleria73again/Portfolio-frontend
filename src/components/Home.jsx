@@ -1,4 +1,4 @@
-import React from 'react';
+import Navbar from './layout/Navbar';
 import Dock from './layout/Dock';
 import Hero from './sections/Hero';
 import About from './sections/About';
@@ -15,7 +15,12 @@ const Home = ({ weatherType, setWeatherType, selectedProject, setSelectedProject
         <div className="animated-bg text-white overflow-x-hidden relative">
             {/* Content Wrapper */}
             <div className="relative z-10">
-                <Dock />
+                <div className="md:hidden">
+                    <Navbar weatherType={weatherType} setWeatherType={setWeatherType} />
+                </div>
+                <div className="hidden md:block">
+                    <Dock />
+                </div>
                 <Hero weatherType={weatherType} setWeatherType={setWeatherType} />
                 <About />
                 <Experience />

@@ -30,7 +30,7 @@ const DockIcon = ({ mouseX, icon, label, href }) => {
         return val - bounds.x - bounds.width / 2;
     });
 
-    let widthSync = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
+    let widthSync = useTransform(distance, [-150, 0, 150], [40, 60, 40]);
     let width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 });
 
     const isContact = label === 'Contact';

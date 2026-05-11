@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMessage, faXmark, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faMessage, faXmark, faPaperPlane, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import Magnetic from './Magnetic';
+import { generateResume } from '../../utils/generateResume';
+import Toast from './Toast';
 
 const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +13,7 @@ const Chatbot = () => {
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [showToast, setShowToast] = useState(false);
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -20,6 +23,12 @@ const Chatbot = () => {
     useEffect(() => {
         scrollToBottom();
     }, [messages, isOpen]);
+
+    const handleDownloadResume = () => {
+        generateResume();
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+    };
 
     const handleSend = async (e) => {
         e.preventDefault();
@@ -53,6 +62,39 @@ const Chatbot = () => {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const renderMessageText = (text) => {
+        // First split by the special resume button token
+        const parts = text.split(/(\[DOWNLOAD_RESUME\])/);
+
+        return parts.map((part, index) => {
+            if (part === '[DOWNLOAD_RESUME]') {
+                return (
+                    <button
+                        key={index}
+                        onClick={handleDownloadResume}
+                        className="mt-3 mb-1 px-4 py-2 bg-blue-500/20 hover:bg-blue-500/40 border border-blue-500/30 text-blue-100 rounded-xl flex items-center gap-2 transition-all shadow-lg active:scale-95 text-xs font-semibold w-fit"
+                    >
+                        <FontAwesomeIcon icon={faFilePdf} />
+                        Download PDF Resume
+                    </button>
+                );
+            }
+
+            // For normal text, parse URLs
+            const urlRegex = /(https?:\/\/[^\s)]+)/g;
+            return part.split(urlRegex).map((subPart, i) => {
+                if (subPart.match(urlRegex)) {
+                    return (
+                        <a key={`${index}-${i}`} href={subPart} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline underline-offset-2 transition-colors">
+                            {subPart}
+                        </a>
+                    );
+                }
+                return subPart;
+            });
+        });
     };
 
     return (
@@ -89,12 +131,22 @@ const Chatbot = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button
-                                onClick={() => setIsOpen(false)}
-                                className="w-8 h-8 md:w-10 md:h-10 rounded-full hover:bg-white/5 flex items-center justify-center text-white/20 hover:text-white transition-all active:scale-90"
-                            >
-                                <FontAwesomeIcon icon={faXmark} className="text-base md:text-lg" />
-                            </button>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    onClick={handleDownloadResume}
+                                    className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/5 hover:bg-white/10 flex items-center gap-2 text-white/70 hover:text-white transition-all text-[10px] md:text-xs font-medium border border-white/5 active:scale-95"
+                                    title="Download Resume"
+                                >
+                                    <FontAwesomeIcon icon={faFilePdf} />
+                                    <span>Resume</span>
+                                </button>
+                                <button
+                                    onClick={() => setIsOpen(false)}
+                                    className="w-8 h-8 md:w-10 md:h-10 rounded-full hover:bg-white/5 flex items-center justify-center text-white/20 hover:text-white transition-all active:scale-90"
+                                >
+                                    <FontAwesomeIcon icon={faXmark} className="text-base md:text-lg" />
+                                </button>
+                            </div>
                         </div>
 
                         {/* Messages Area */}
@@ -112,7 +164,7 @@ const Chatbot = () => {
                                             ? 'bg-blue-500/10 border border-blue-500/20 text-blue-200/90 rounded-tr-none'
                                             : 'bg-white/5 border border-white/10 text-white/70 rounded-tl-none font-light'}
                                     `}>
-                                        {msg.text}
+                                        {renderMessageText(msg.text)}
                                     </div>
                                 </motion.div>
                             ))}

@@ -6,8 +6,10 @@ import CaseStudy from '../common/CaseStudy'
 import smol from '../../assets/smol.png'
 import pupapers from '../../assets/puPapers.png'
 import travel from '../../assets/travel.png'
-import bunai from '../../assets/bunai.png'
-import threadTimberIcon from '../../assets/threadsAndTimber.png'
+import driftoImg from '../../assets/Drifto.png'
+import kingCustomImg from '../../assets/KingCustom.png'
+import rankCheckerImg from '../../assets/RankChecker.png'
+import logoImg from '../../assets/logo.png'
 
 const Projects = ({ selectedProject, setSelectedProject }) => {
   const projectData = [
@@ -20,20 +22,28 @@ const Projects = ({ selectedProject, setSelectedProject }) => {
       accentColor: '#FF6B00'
     },
     {
-      image: threadTimberIcon,
-      title: 'THREAD & TIMBER',
-      description: 'A premium e-commerce platform for handcrafted artisan apparel and sustainable fashion.',
-      tech: ['Next.js', 'TypeScript', 'Express', 'MongoDB'],
-      link: 'https://thread-and-timber-mror.vercel.app/',
-      accentColor: '#10b981', // Emerald Green
+      image: rankCheckerImg,
+      title: 'RANK PREDICTOR PLATFORM',
+      description: 'A high-performance automated rank prediction system that leverages scalable data processing and asynchronous job queues (BullMQ/Redis) to deliver real-time competitive analytics.',
+      tech: ['Next.js', 'Express', 'MongoDB', 'Redis', 'BullMQ'],
+      link: 'https://hprankchecker.in/',
+      accentColor: '#8b5cf6', // Purple
     },
     {
-      image: bunai,
-      title: 'BUNAI FROM THE HILLS',
-      description: 'An e-commerce website for a Himalayan knitting brand, focusing on heritage and craftsmanship.',
-      tech: ['React', 'Vite', 'Express', 'MongoDB'],
-      link: 'https://bunai-from-hills.vercel.app/',
-      accentColor: '#f59e0b', // Amber
+      image: kingCustomImg,
+      title: 'KING CUSTOMS',
+      description: 'A premium, ultra-sophisticated landing page and management system for a luxury painting & restoration brand. Features a glassmorphic UI, dynamic interactions, and an optimized image gallery.',
+      tech: ['React', 'Vite', 'Express', 'MongoDB', 'Tailwind'],
+      link: 'https://kingcpd.ca/',
+      accentColor: '#10b981', // Emerald
+    },
+    {
+      image: driftoImg,
+      title: 'DRIFTO',
+      description: 'An immersive, high-octane automotive showcase. Built with Next.js, it uses Lenis for buttery-smooth scrolling and Framer Motion for cinematic transitions between dynamic galleries.',
+      tech: ['Next.js', 'Framer Motion', 'Lenis', 'Tailwind CSS'],
+      link: 'https://drift-lake-sigma.vercel.app/',
+      accentColor: '#f43f5e', // Rose
     },
     {
       image: smol,

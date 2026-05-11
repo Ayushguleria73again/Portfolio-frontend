@@ -57,34 +57,28 @@ export const resumeData = {
 
   projects: [
     {
-      name: "my-luxe-store",
-      description: "A sophisticated e-commerce solution featuring real-time inventory management, advanced analytics, and seamless payment integration.",
-      tech: ["React", "Node.js (WIP)", "MongoDB"],
-      link: "https://my-luxe-store.vercel.app/"
+      name: "AI Interview Platform",
+      description: "An advanced, real-time AI-driven platform that conducts structured voice-based screening interviews. Features natural conversations using ElevenLabs Conversational AI, real-time translation, and strict answer evaluation.",
+      tech: ["Next.js", "Prisma", "Tailwind", "Socket.io", "PostgreSQL"],
+      link: "#"
     },
     {
-      name: "Task Management System",
-      description: "Collaborative workspace with real-time synchronization, advanced filtering, and drag-and-drop interface.",
-      tech: ["React", "Node.js (WIP)", "MongoDB"],
-      link: "https://task-manager-plum-zeta.vercel.app/"
+      name: "Rank Predictor Platform",
+      description: "A high-performance automated rank prediction system that leverages scalable data processing and asynchronous job queues (BullMQ/Redis) to deliver real-time competitive analytics.",
+      tech: ["Next.js", "Express", "MongoDB", "Redis", "BullMQ"],
+      link: "https://hprankchecker.in/"
     },
     {
-      name: "Thread & Timber",
-      description: "A premium e-commerce platform for handcrafted artisan apparel and sustainable fashion.",
-      tech: ["Next.js", "TypeScript", "Express.js", "MongoDB", "Tailwind CSS"],
-      link: "https://thread-and-timber-mror.vercel.app/"
+      name: "King Customs",
+      description: "A premium, ultra-sophisticated landing page and management system for a luxury painting & restoration brand. Features a glassmorphic UI, dynamic interactions, and an optimized image gallery.",
+      tech: ["React", "Vite", "Express", "MongoDB", "Tailwind"],
+      link: "https://kingcpd.ca/"
     },
     {
-      name: "Bunai From The Hills",
-      description: "An e-commerce website for a Himalayan knitting brand.",
-      tech: ["React", "Vite", "Express.js", "MongoDB"],
-      link: "https://bunai-from-hills.vercel.app/"
+      name: "Drifto",
+      description: "An immersive, high-octane automotive showcase. Built with Next.js, it uses Lenis for buttery-smooth scrolling and Framer Motion for cinematic transitions between dynamic galleries.",
+      tech: ["Next.js", "Framer Motion", "Lenis", "Tailwind CSS"],
+      link: "https://drift-lake-sigma.vercel.app/"
     },
-    {
-      name: "MyOnlineTools",
-      description: "A collection of free online productivity tools including converters and generators.",
-      tech: ["React", "Vite", "JavaScript"],
-      link: "https://myonlinetools.site/"
-    }
   ]
 };

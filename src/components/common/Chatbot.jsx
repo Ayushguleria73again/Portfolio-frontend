@@ -133,14 +133,6 @@ const Chatbot = () => {
                             </div>
                             <div className="flex items-center gap-2">
                                 <button
-                                    onClick={handleDownloadResume}
-                                    className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/5 hover:bg-white/10 flex items-center gap-2 text-white/70 hover:text-white transition-all text-[10px] md:text-xs font-medium border border-white/5 active:scale-95"
-                                    title="Download Resume"
-                                >
-                                    <FontAwesomeIcon icon={faFilePdf} />
-                                    <span>Resume</span>
-                                </button>
-                                <button
                                     onClick={() => setIsOpen(false)}
                                     className="w-8 h-8 md:w-10 md:h-10 rounded-full hover:bg-white/5 flex items-center justify-center text-white/20 hover:text-white transition-all active:scale-90"
                                 >

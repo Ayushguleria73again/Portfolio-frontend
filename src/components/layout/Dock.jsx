@@ -47,7 +47,6 @@ const DockIcon = ({ mouseX, icon, label, href, action }) => {
     let width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 });
 
     const isContact = label === 'Contact';
-    const isResume = label === 'Resume';
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -68,8 +67,8 @@ const DockIcon = ({ mouseX, icon, label, href, action }) => {
                 <div className="w-full h-full flex items-center justify-center">
                     <FontAwesomeIcon
                         icon={icon}
-                        className={`transition-colors text-lg md:text-xl ${isContact || isResume ? 'opacity-80 group-hover:opacity-100' : 'text-white/60 group-hover:text-white'}`}
-                        style={(isContact || isResume) ? { color: 'var(--primary-accent)' } : undefined}
+                        className={`transition-colors text-lg md:text-xl ${isContact ? 'opacity-80 group-hover:opacity-100' : 'text-white/60 group-hover:text-white'}`}
+                        style={(isContact) ? { color: 'var(--primary-accent)' } : undefined}
                     />
                 </div>
 

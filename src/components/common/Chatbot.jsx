@@ -35,7 +35,10 @@ const Chatbot = () => {
             const response = await fetch(`${apiUrl}/api/ai/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: input })
+                body: JSON.stringify({ 
+                    message: input,
+                    history: messages.slice(1) // Send all messages except the initial system greeting
+                })
             });
 
             const data = await response.json();

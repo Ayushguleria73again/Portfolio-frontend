@@ -195,6 +195,29 @@ export const generateResume = () => {
     yPosition += projHeight + 8;
   });
 
+  // ===== STRENGTHS =====
+  if (yPosition > 230) {
+    doc.addPage();
+    yPosition = 20;
+  }
+  yPosition = addSectionHeader('Strengths', yPosition);
+  const strengthsText = resumeData.strengths.join(' • ');
+  const strengthsHeight = addText(strengthsText, margin, yPosition, pageWidth - 2 * margin, 10, false);
+  yPosition += strengthsHeight + 12;
+
+  // ===== PORTFOLIO LINKS =====
+  if (yPosition > 230) {
+    doc.addPage();
+    yPosition = 20;
+  }
+  yPosition = addSectionHeader('Additional Projects & Links', yPosition);
+  resumeData.portfolioLinks.forEach((link) => {
+    doc.setFontSize(9);
+    doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
+    doc.text(link, margin, yPosition);
+    yPosition += 6;
+  });
+
   // ===== FOOTER =====
   const totalPages = doc.internal.pages.length - 1;
   for (let i = 1; i <= totalPages; i++) {

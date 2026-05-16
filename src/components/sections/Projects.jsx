@@ -23,24 +23,24 @@ const Projects = ({ selectedProject, setSelectedProject }) => {
     },
     {
       image: rankCheckerImg,
-      title: 'RANK PREDICTOR PLATFORM',
-      description: 'A high-performance automated rank prediction system that leverages scalable data processing and asynchronous job queues (BullMQ/Redis) to deliver real-time competitive analytics.',
-      tech: ['Next.js', 'Express', 'MongoDB', 'Redis', 'BullMQ'],
+      title: 'HPRankChecker Platform',
+      description: 'Built a competitive exam rank prediction platform capable of handling large-scale student datasets. Implemented asynchronous processing using BullMQ and Redis for high-performance task handling. Developed real-time analytics dashboards and optimized backend performance.',
+      tech: ['Next.js', 'Node.js', 'MongoDB', 'Redis', 'BullMQ', 'Express.js'],
       link: 'https://hprankchecker.in/',
       accentColor: '#8b5cf6', // Purple
     },
     {
       image: kingCustomImg,
       title: 'KING CUSTOMS',
-      description: 'A premium, ultra-sophisticated landing page and management system for a luxury painting & restoration brand. Features a glassmorphic UI, dynamic interactions, and an optimized image gallery.',
-      tech: ['React', 'Vite', 'Express', 'MongoDB', 'Tailwind'],
+      description: 'Designed and developed a premium business landing page and management system for a luxury restoration brand. Created glassmorphism-inspired UI with modern animations and smooth user interactions. Optimized image galleries and frontend performance.',
+      tech: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Lenis'],
       link: 'https://kingcpd.ca/',
       accentColor: '#10b981', // Emerald
     },
     {
       image: driftoImg,
       title: 'DRIFTO',
-      description: 'An immersive, high-octane automotive showcase. Built with Next.js, it uses Lenis for buttery-smooth scrolling and Framer Motion for cinematic transitions between dynamic galleries.',
+      description: 'Developed an immersive automotive showcase website with cinematic animations and smooth scrolling. Built responsive UI components with interactive galleries and transition effects. Focused heavily on motion design and premium frontend experience.',
       tech: ['Next.js', 'Framer Motion', 'Lenis', 'Tailwind CSS'],
       link: 'https://drift-lake-sigma.vercel.app/',
       accentColor: '#f43f5e', // Rose

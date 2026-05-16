@@ -100,7 +100,7 @@ const Hero = ({ weatherType, setWeatherType }) => {
           transition={{ delay: 1, duration: 0.8 }}
           className="text-xl md:text-3xl font-light mb-10 mx-auto tracking-widest uppercase text-gray-400"
         >
-          Full Stack Software Engineer
+          Full Stack Software Developer
         </motion.div>
 
         <motion.p

@@ -2,83 +2,106 @@
 export const resumeData = {
   personal: {
     name: "Ayush Guleria",
-    title: "Full Stack Software Engineer",
-    email: "Ayushguleria73@gmail.com",
+    title: "Full Stack Software Developer",
+    email: "ayushguleria73@gmail.com",
     location: "Himachal Pradesh, India",
-    phone: "+91 8580523265", // Update with actual number
+    phone: "+91 8580523265",
     website: "https://portfolio-frontend-gilt-omega.vercel.app/",
     linkedin: "https://www.linkedin.com/in/ayush-guleria-162a83206/",
     github: "https://github.com/Ayushguleria73again"
   },
 
-  summary: "Full Stack Software Engineer with expertise in building scalable web applications using React, Node.js, and MongoDB. Passionate about creating intuitive user experiences and solving complex problems with elegant solutions. Currently exploring 3D Web Design and Server-Side Rendering.",
+  summary: "Full Stack Software Developer skilled in building scalable web applications using React, Next.js, Node.js, Express.js, MongoDB, PostgreSQL, and TypeScript. Experienced in creating modern user interfaces, REST APIs, authentication systems, and AI-powered web platforms. Strong understanding of frontend architecture, backend systems, database optimization, and deployment workflows. Focused on building high-performance products with clean UI/UX, smooth animations, real-time systems, and production-ready backend infrastructure.",
 
   experience: [
     {
       company: "Boffin Blocks",
       role: "Full Stack Developer Intern",
-      period: "2026 - Present",
+      period: "2026 – Present",
       location: "Remote",
       description: [
-        "Developing scalable web applications using React and Node.js",
-        "Enhancing user interfaces with modern frontend technologies",
-        "Collaborating with cross-functional teams to deliver high-quality software solutions"
+        "Built scalable full-stack web applications using React, Node.js, Express.js, and MongoDB.",
+        "Developed REST APIs and backend services for real-time data exchange and application workflows.",
+        "Collaborated with frontend and backend teams to deliver optimized and maintainable software solutions.",
+        "Integrated third-party APIs and external services to extend platform functionality.",
+        "Worked with Git and modern development workflows for version control and collaboration.",
+        "Improved application performance and responsiveness across devices.",
+        "Implemented authentication and authorization workflows using secure middleware practices.",
+        "Assisted in deployment pipelines and production environment management."
       ]
     }
   ],
 
   education: [
     {
-      institution: "NEWUS, Dharamshala",
-      degree: "Full Stack Software Engineering Crash Course",
-      period: "2024 - 2025",
-      description: "Intensive training in React, Next.js, Node.js, Express, MongoDB, REST APIs, authentication systems, and scalable backend architectures with hands-on project experience."
+      institution: "Chandigarh University, Chandigarh",
+      degree: "Bachelor of Computer Applications (BCA)",
+      period: "Expected Graduation: 2029",
+      description: "Pursuing Bachelor's degree in Computer Applications with a focus on modern software engineering."
     },
     {
-      institution: "IGNOU",
-      degree: "Bachelor of Computer Applications (BCA)",
-      period: "2022 - 2023 (Drop Out)",
-      description: "Pursued foundational computer science coursework before pivoting to practical software development."
+      institution: "NEWUS, Dharamshala",
+      degree: "Full Stack Software Engineering Crash Course",
+      period: "2025",
+      description: "Intensive crash course in Full Stack Software Engineering, specializing in modern web technologies."
     },
     {
       institution: "GSSS Model Senior Secondary School, Mathalar",
       degree: "12th Grade (Mathematics)",
-      period: "2018 - 2019(Drop Out)",
-      description: "Completed senior secondary education with focus on Mathematics."
+      period: "2019",
+      description: "Completed senior secondary education with a focus on Mathematics."
     }
   ],
 
   skills: {
-    frontend: ["React", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Framer Motion"],
-    backend: ["Node.js", "Express.js", "MongoDB", "REST APIs"],
-    tools: ["Git", "Docker", "VS Code", "Vite", "Next.js"],
-    other: ["Responsive Design", "UI/UX Design", "Problem Solving", "Team Collaboration"]
+    frontend: ["React.js", "Next.js", "JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3", "Tailwind CSS", "Framer Motion", "Responsive Web Design"],
+    backend: ["Node.js", "Express.js", "REST APIs", "Authentication & Authorization", "API Integration", "Socket.io"],
+    database: ["MongoDB", "PostgreSQL", "Prisma ORM", "Redis"],
+    infrastructure: ["CI/CD", "Git & GitHub", "Deployment & Hosting"],
+    other: ["UI/UX Design", "Performance Optimization", "Real-Time Systems", "SEO Optimization"]
   },
 
   projects: [
     {
       name: "AI Interview Platform",
-      description: "An advanced, real-time AI-driven platform that conducts structured voice-based screening interviews. Features natural conversations using ElevenLabs Conversational AI, real-time translation, and strict answer evaluation.",
-      tech: ["Next.js", "Prisma", "Tailwind", "Socket.io", "PostgreSQL"],
+      description: "Developed a real-time AI-powered interview platform for automated voice-based screening interviews. Integrated conversational AI features using ElevenLabs AI for natural voice interactions. Implemented answer evaluation systems, multilingual support, and structured interview workflows.",
+      tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Socket.io", "TypeScript", "REST APIs"],
       link: "#"
     },
     {
-      name: "Rank Predictor Platform",
-      description: "A high-performance automated rank prediction system that leverages scalable data processing and asynchronous job queues (BullMQ/Redis) to deliver real-time competitive analytics.",
-      tech: ["Next.js", "Express", "MongoDB", "Redis", "BullMQ"],
+      name: "HPRankChecker Platform",
+      description: "Built a competitive exam rank prediction platform capable of handling large-scale student datasets. Implemented asynchronous processing using BullMQ and Redis for high-performance task handling. Developed real-time analytics dashboards and optimized backend performance.",
+      tech: ["Next.js", "Node.js", "MongoDB", "Redis", "BullMQ", "Express.js"],
       link: "https://hprankchecker.in/"
     },
     {
       name: "King Customs",
-      description: "A premium, ultra-sophisticated landing page and management system for a luxury painting & restoration brand. Features a glassmorphic UI, dynamic interactions, and an optimized image gallery.",
-      tech: ["React", "Vite", "Express", "MongoDB", "Tailwind"],
+      description: "Designed and developed a premium business landing page and management system for a luxury restoration brand. Created glassmorphism-inspired UI with modern animations and smooth user interactions. Optimized image galleries and frontend performance.",
+      tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Lenis"],
       link: "https://kingcpd.ca/"
     },
     {
       name: "Drifto",
-      description: "An immersive, high-octane automotive showcase. Built with Next.js, it uses Lenis for buttery-smooth scrolling and Framer Motion for cinematic transitions between dynamic galleries.",
+      description: "Developed an immersive automotive showcase website with cinematic animations and smooth scrolling. Built responsive UI components with interactive galleries and transition effects. Focused heavily on motion design and premium frontend experience.",
       tech: ["Next.js", "Framer Motion", "Lenis", "Tailwind CSS"],
       link: "https://drift-lake-sigma.vercel.app/"
-    },
+    }
+  ],
+
+  portfolioLinks: [
+    "https://link-shortner-frontend-kappa.vercel.app/",
+    "https://sharp-styles-showcase.vercel.app/",
+    "https://drift-lake-sigma.vercel.app/",
+    "https://explore-himachal-lac.vercel.app/"
+  ],
+
+  strengths: [
+    "Full Stack MERN Development",
+    "Problem Solving & Debugging",
+    "Scalable System Design",
+    "Fast Learning Ability",
+    "Clean UI Development",
+    "AI Integration & Automation",
+    "Strong Communication & Team Collaboration"
   ]
 };

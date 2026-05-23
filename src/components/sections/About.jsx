@@ -66,10 +66,14 @@ const About = () => {
               <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 flex flex-col justify-center h-full hover:bg-white/10 transition-colors duration-300">
                 <h3 className="text-2xl font-light text-white mb-4">My <span className="text-white font-bold">Journey</span></h3>
                 <p className="text-white/70 leading-relaxed font-light text-lg">
-                  I'm a passionate developer focused on creating intuitive and dynamic user experiences.
-                  With a strong foundation in <b className="text-white">React</b> and modern web technologies,
-                  I transform complex problems into elegant, scalable solutions. Currently exploring
-                  <b className="text-white"> 3D Web Design</b> and <b className="text-white">Server-Side Rendering</b>.
+                  Full Stack Developer focused on building scalable, high-performance web
+                  applications with modern frontend engineering and real-time systems.
+                  Experienced with <b className="text-white">React</b>,{" "}
+                  <b className="text-white">Next.js</b>,{" "}
+                  <b className="text-white">TypeScript</b>, and backend technologies for
+                  creating production-grade digital products. Passionate about clean UI
+                  architecture, motion-driven experiences, and engineering applications that
+                  feel fast, intuitive, and polished across every device.
                 </p>
               </div>
             </Tilt>
@@ -84,7 +88,7 @@ const About = () => {
           >
             <Tilt className="h-full">
               <div className="bg-[#0f0f0f] border border-white/10 rounded-3xl p-6 flex flex-col items-center justify-center h-full hover:border-white/30 transition-colors">
-                <span className="text-5xl font-bold text-white mb-2">7+</span>
+                <span className="text-5xl font-bold text-white mb-2">10+</span>
                 <span className="text-white/50 text-sm uppercase tracking-wider">Projects Completed</span>
               </div>
             </Tilt>
@@ -100,7 +104,7 @@ const About = () => {
             <Tilt className="h-full">
               <div className="bg-[#1a1a1a] border border-white/10 rounded-3xl p-6 flex flex-col items-center justify-center h-full relative overflow-hidden group">
                 <div className="absolute inset-0 bg-white/5 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-3xl" />
-                <span className="text-5xl font-bold text-white mb-2 relative z-10">1+</span>
+                <span className="text-5xl font-bold text-white mb-2 relative z-10">2+</span>
                 <span className="text-white/50 text-sm uppercase tracking-wider relative z-10">Years Experience</span>
               </div>
             </Tilt>

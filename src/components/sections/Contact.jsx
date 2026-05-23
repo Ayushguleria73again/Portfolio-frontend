@@ -60,6 +60,25 @@ const Contact = () => {
 
   const inputClasses = "w-full bg-transparent border-none text-white focus:ring-0 placeholder-white/20 text-lg py-4 px-0 relative z-10 focus:outline-none";
 
+  const socialLinks = [
+  {
+    icon: faGithub,
+    link: "https://github.com/Ayushguleria73again",
+  },
+  {
+    icon: faLinkedin,
+    link: "https://www.linkedin.com/in/ayush-guleria-162a83206",
+  },
+  {
+    icon: faTwitter,
+    link: "https://twitter.com/",
+  },
+  {
+    icon: faInstagram,
+    link: "https://instagram.com/_ayush_guleria_",
+  },
+];
+
   return (
     <section id="contact" className="py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -114,9 +133,9 @@ const Contact = () => {
             </div>
 
             <div className="flex gap-4 mt-16">
-              {[faGithub, faLinkedin, faTwitter, faInstagram].map((icon, i) => (
-                <a key={i} href="#" className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 transition-all duration-300 shadow-lg">
-                  <FontAwesomeIcon icon={icon} className="text-xl" />
+              {socialLinks.map((link, i) => (
+                <a key={i} href={link.link} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 transition-all duration-300 shadow-lg">
+                  <FontAwesomeIcon icon={link.icon} className="text-xl" />
                 </a>
               ))}
             </div>

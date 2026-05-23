@@ -9,17 +9,25 @@ import travel from '../../assets/travel.png'
 import driftoImg from '../../assets/Drifto.png'
 import kingCustomImg from '../../assets/KingCustom.png'
 import rankCheckerImg from '../../assets/RankChecker.png'
-import logoImg from '../../assets/logo.png'
+import hellochd from '../../assets/hellochd.png'
 
 const Projects = ({ selectedProject, setSelectedProject }) => {
   const projectData = [
     {
-      image: pupapers,
-      title: "PUpapers",
-      description: "A comprehensive educational platform designed for Panjab University (PU) CET preparation. Features a high-performance mock test interface, real-time analytics, and AI-powered study assistance (Gemini 1.5 Flash).",
-      tech: ["Next.js", "TypeScript", "Node.js", "MongoDB", "Tailwind", "Framer Motion"],
-      link: "https://p-upapers-mcq-frontend.vercel.app/",
-      accentColor: '#FF6B00'
+      image: hellochd,
+      title: 'HelloCHD',
+      description: 'A premium developer network and local community platform for the Chandigarh Tri-City. Features real-time P2P messaging via Server-Sent Events, progressive web app capability, administrative dashboards, and soft deletion grace periods.',
+      tech: ['Next.js', 'React', 'Prisma', 'PostgreSQL', 'Zustand', 'React Query'],
+      link: 'https://devcircle-app-seven.vercel.app/',
+      accentColor: '#06b6d4', // Cyan
+    },
+    {
+      image: smol,
+      title: 'SMOL ELITE',
+      description: 'The professional-grade link shortener with real-time audience intelligence, city-level tracking, and automated reporting.',
+      tech: ['Next.js', 'Node.js', 'MongoDB', 'Express', 'Framer Motion', 'Tailwind CSS'],
+      link: 'https://link-shortner-frontend-kappa.vercel.app/',
+      accentColor: '#6366f1', // High-Energy Indigo
     },
     {
       image: rankCheckerImg,
@@ -28,6 +36,14 @@ const Projects = ({ selectedProject, setSelectedProject }) => {
       tech: ['Next.js', 'Node.js', 'MongoDB', 'Redis', 'BullMQ', 'Express.js'],
       link: 'https://hprankchecker.in/',
       accentColor: '#8b5cf6', // Purple
+    },
+    {
+      image: pupapers,
+      title: "PUpapers",
+      description: "A comprehensive educational platform designed for Panjab University (PU) CET preparation. Features a high-performance mock test interface, real-time analytics, and AI-powered study assistance (Gemini 1.5 Flash).",
+      tech: ["Next.js", "TypeScript", "Node.js", "MongoDB", "Tailwind", "Framer Motion"],
+      link: "https://p-upapers-mcq-frontend.vercel.app/",
+      accentColor: '#FF6B00'
     },
     {
       image: kingCustomImg,
@@ -44,14 +60,6 @@ const Projects = ({ selectedProject, setSelectedProject }) => {
       tech: ['Next.js', 'Framer Motion', 'Lenis', 'Tailwind CSS'],
       link: 'https://drift-lake-sigma.vercel.app/',
       accentColor: '#f43f5e', // Rose
-    },
-    {
-      image: smol,
-      title: 'SMOL ELITE',
-      description: 'The professional-grade link shortener with real-time audience intelligence, city-level tracking, and automated reporting.',
-      tech: ['Next.js', 'Node.js', 'MongoDB', 'Express', 'Framer Motion', 'Tailwind CSS'],
-      link: 'https://link-shortner-frontend-kappa.vercel.app/',
-      accentColor: '#6366f1', // High-Energy Indigo
     },
     {
       image: travel,

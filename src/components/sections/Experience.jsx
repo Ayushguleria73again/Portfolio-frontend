@@ -93,7 +93,7 @@ const Experience = () => {
     const experiences = [
         {
             company: 'Boffin Blocks',
-            role: 'Full Stack Developer Intern',
+            role: 'Full Stack Developer',
             period: '2026 - Present',
             description: 'Developing scalable web applications and enhancing user interfaces with modern frontend technologies. Collaborating with cross-functional teams to deliver high-quality software solutions.',
         },

@@ -26,6 +26,15 @@ A sophisticated, vertical scrolling showcase for projects.
 
 ## 🚀 Getting Started
 
+### Environment Setup
+
+1. Copy the template environment file:
+   ```bash
+   cp .env.example .env
+   ```
+2. Open the newly created `.env` file and set your backend API URL:
+   - `VITE_API_URL`: Set to `http://localhost:8888` for local development, or your deployed backend URL.
+
 ### Installation
 
 ```bash

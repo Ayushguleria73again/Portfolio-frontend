@@ -62,3 +62,7 @@ npm run preview
 *   `src/components/sections`: Page-specific sections (Hero, About, Projects, Contact).
 *   `src/pages`: Top-level page components.
 *   `src/index.css`: Global styles and Tailwind configuration.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](file:///Users/ayush/Desktop/untitled%20folder%207/Portfolio-frontend/LICENSE) file for details.

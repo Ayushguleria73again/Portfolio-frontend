@@ -1,0 +1,5 @@
+# Code Owners for Portfolio Frontend
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# By default, assign ownership of all files in the repository to the primary maintainer
+*       @Ayushguleria73again
